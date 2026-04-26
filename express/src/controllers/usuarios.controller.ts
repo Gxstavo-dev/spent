@@ -87,7 +87,7 @@ export const login = async (req: Request, res: Response) => {
       email: usuario.email,
     },
     // firma que esta en .env
-    process.env.JWTCLAVE!,
+    process.env.JWT_SECRET!,
     { expiresIn: "24h" }, // expira en 24 horas este token
   );
   // retornar el token

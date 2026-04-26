@@ -1,6 +1,9 @@
 // para iniciar el servidor
-import "dotenv/config"; // usar archivo .env
+import dotenv from "dotenv"; // usar archivo .env
+import path from "path";
 import app from "./app"; // importar la configuracion
+
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const PORT = process.env.PORT || 3000; // si no es el puerto definido en .env usamos uno preterminado
 

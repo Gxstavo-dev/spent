@@ -117,3 +117,18 @@ if (!usuario.contrasena) {
 }
 const contraseñaValida = await bcrypt.compare(contrasena, usuario.contrasena);
 ```
+
+---
+
+## 11. dotenv.config() no encuentra el archivo .env
+**Error:** `secretOrPrivateKey must have a value` o variables de entorno undefined
+
+**Causa:** dotenv.config() no recibe la ruta del archivo .env. En Bun a veces no lo encuentra automaticamente.
+
+**Solucion:** Especificar la ruta del archivo .env.
+```typescript
+import dotenv from "dotenv";
+import path from "path";
+
+dotenv.config({ path: path.join(__dirname, ".env") });
+```
