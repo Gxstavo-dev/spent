@@ -3,6 +3,291 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="src/styles/index.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+        />
     </head>
-    <body></body>
+    <body>
+        <nav>
+            <a href="/" class="logo">Spent</a>
+            <div class="nav-links">
+                <a href="#"> login </a>
+                <a href="#"> registrarse </a>
+                <a class="github" href="#"> github </a>
+            </div>
+        </nav>
+
+        <div class="contenedor">
+            <aside class="sidebar">
+                <h1 class="sidebar-titulo">Spent</h1>
+
+                <div class="sidebar-seccion">
+                    <div class="sidebar-label">SOBRE LA APP</div>
+                    <p class="sidebar-texto">
+                        Gestion de ingresos y gastos personales
+                    </p>
+                </div>
+
+                <div class="sidebar-seccion">
+                    <div class="sidebar-label">AUTOR</div>
+                    <p class="sidebar-autor">Gxstavo-dev</p>
+                </div>
+
+                <div class="sidebar-seccion">
+                    <div class="sidebar-label">FECHA</div>
+                    <p class="sidebar-fecha">2026</p>
+                </div>
+
+                <div class="sidebar-seccion">
+                    <div class="sidebar-label">STACK TECNOLOGICO</div>
+                    <div class="tags">
+                        <span class="tag">Tauri</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">Vanilla JS</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-seccion">
+                    <div class="sidebar-label">CATEGORIAS DISPONIBLES</div>
+                    <div class="tags">
+                        <span
+                            class="tag"
+                            style="background: #e0f2fe; color: #3b82f6"
+                            >Personal</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #fef2f2; color: #f87171"
+                            >Comida</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #eff6ff; color: #60a5fa"
+                            >Transporte</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #fffbeb; color: #d97706"
+                            >Trabajo</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #f0fdfa; color: #14b8a6"
+                            >Salud</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #f0fdf4; color: #22c55e"
+                            >Entretenimiento</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #fefce8; color: #ca8a04"
+                            >Hogar</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #f3f4f6; color: #6b7280"
+                            >Ropa</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #fef2f2; color: #ef4444"
+                            >Educacion</span
+                        >
+                        <span
+                            class="tag"
+                            style="background: #f9fafb; color: #6b7280"
+                            >Otros</span
+                        >
+                    </div>
+                </div>
+            </aside>
+
+            <article class="articulo">
+                <div class="articulo-label" style="border: none"></div>
+
+                <h1>Noticias</h1>
+                <p class="subtitulo">Actualizaciones del proyecto</p>
+
+                <p>Aun no hay actualizaciones disponibles.</p>
+                <p>Vuelve pronto para ver las ultimas noticias sobre Spent.</p>
+
+                <h1>Spent</h1>
+                <p class="subtitulo">Gestion de ingresos y gastos personales</p>
+
+                <img src="src/assets/mockup-spent.png" alt="Spent" />
+
+                <h2>Sobre la app</h2>
+                <p>
+                    Spent es una aplicacion de escritorio para gestionar tus
+                    gastos e ingresos personales. Esta disenada para mantener un
+                    control simple y efectivo de tus finanzas.
+                </p>
+                <p>
+                    Es gratuita, de codigo abierto y no requiere conexion a
+                    internet. Tus datos se quedan en tu computadora.
+                </p>
+
+                <h3>Ideal para:</h3>
+                <ul>
+                    <li>Controlar tus gastos del dia a dia</li>
+                    <li>Ver cuanto dinero te sobra</li>
+                    <li>Ordenar tus finanzas por categorias</li>
+                    <li>Llevar historial de todo</li>
+                </ul>
+
+                <h2>Que puedes hacer</h2>
+
+                <h3>Registrar</h3>
+                <p>
+                    Anota cada gasto o ingreso con detalles que te ayuden a
+                    recordar.
+                </p>
+                <ul>
+                    <li>Gastos e ingresos</li>
+                    <li>Cada transaccion con titulo y descripcion</li>
+                    <li>Categorias por color</li>
+                    <li>Agregar notas</li>
+                </ul>
+
+                <h3>Organizar</h3>
+                <p>
+                    Encuentra lo que necesitas rapido y ve tu dinero en
+                    cualquier momento.
+                </p>
+                <ul>
+                    <li>Ver balance total en tiempo real</li>
+                    <li>Buscar transacciones</li>
+                    <li>Filtrar por mes o categoria</li>
+                    <li>Marcar favoritos</li>
+                    <li>Exportar tus datos</li>
+                </ul>
+
+                <h2>Para desarrolladores</h2>
+
+                <h3>Por que estas tecnologias</h3>
+                <ul>
+                    <li>
+                        <strong>Tauri</strong> - Apps desktop rapidas y ligeras,
+                        menor tamanho que Electron
+                    </li>
+                    <li>
+                        <strong>Vanilla JS</strong> - Sin frameworks, sin
+                        bundlers complejos, ideal para apps simples
+                    </li>
+                    <li>
+                        <strong>Express</strong> - Estandar para APIs REST con
+                        Node.js
+                    </li>
+                    <li>
+                        <strong>Bun</strong> - Runtime mas rapido que Node.js
+                        para el servidor
+                    </li>
+                    <li>
+                        <strong>SQLite</strong> - Base de datos local, sin
+                        instalar servidores adicionales
+                    </li>
+                    <li>
+                        <strong>JWT + bcrypt</strong> - Autenticacion segura sin
+                        estado
+                    </li>
+                </ul>
+
+                <h3>Arquitectura</h3>
+                <p>
+                    Patron MVC en Express: Cliente -> Routes -> Controller ->
+                    Database
+                </p>
+
+                <h3>Modelos de Datos</h3>
+                <ul>
+                    <li>
+                        <strong>usuarios</strong> - id, email, nombre,
+                        contrasena (hash), fechas
+                    </li>
+                    <li>
+                        <strong>categorias</strong> - id, categoria, color, tipo
+                        (gasto/ingreso), idUsuario
+                    </li>
+                    <li>
+                        <strong>gastos</strong> - id, monto, descripcion, fecha,
+                        idUsuario, idCategoria
+                    </li>
+                </ul>
+
+                <h3>API Endpoints</h3>
+                <ul>
+                    <li>
+                        <strong>POST /usuarios/register</strong> - Crear cuenta
+                    </li>
+                    <li>
+                        <strong>POST /usuarios/login</strong> - Iniciar sesion
+                        (devuelve JWT)
+                    </li>
+                    <li>
+                        <strong>GET/POST/PUT/DELETE /categorias</strong> - CRUD
+                        categorias (JWT)
+                    </li>
+                    <li>
+                        <strong>GET/POST/PUT/DELETE /gastos</strong> - CRUD
+                        gastos (JWT)
+                    </li>
+                </ul>
+
+                <h3>Estructura de Carpetas</h3>
+                <ul>
+                    <li>/src - Frontend (Vanilla JS)</li>
+                    <li>/express/src - Backend API</li>
+                    <li>/src-tauri - App desktop (Rust)</li>
+                </ul>
+
+                <h3>Variables de Entorno</h3>
+                <ul>
+                    <li>
+                        <strong>PORT</strong> - Puerto del servidor (default
+                        3000)
+                    </li>
+                    <li>
+                        <strong>JWT_SECRET</strong> - Clave secreta para tokens
+                    </li>
+                </ul>
+
+                <h3>Instalar y Ejecutar</h3>
+                <ul>
+                    <li>git clone del repositorio</li>
+                    <li>bun install</li>
+                    <li>bun run express/src/index.ts</li>
+                </ul>
+
+                <h3>Build</h3>
+                <ul>
+                    <li>bun run tauri build</li>
+                    <li>Ejecutable generado en src-tauri/target/release</li>
+                </ul>
+
+                <h3>Requisitos</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Bun</li>
+                    <li>Rust</li>
+                    <li>Git</li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="lightbox" id="lightbox">
+            <img src="src/assets/mockup-spent.png" alt="Spent" />
+        </div>
+
+        <script src="src/javascript/index.js"></script>
+    </body>
 </html>
