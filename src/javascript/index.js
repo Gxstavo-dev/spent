@@ -1,7 +1,28 @@
 const lightbox = document.getElementById("lightbox");
 const articuloImagen = document.querySelector(".articulo img");
-const github = document.querySelector(".github");
 
+const botones = document.querySelectorAll(".login-registro button");
+const fondoblur = document.querySelector(".fondoblur");
+
+botones.forEach((boton) => {
+  boton.addEventListener("click", () => {
+    const estaActivo = boton.classList.contains("activo");
+    fondoblur.classList.add("activado");
+
+    // quitamos activo de tods
+    botones.forEach((b) => {
+      b.classList.remove("activo");
+    });
+
+    if (!estaActivo) {
+      boton.classList.add("activo");
+    } else {
+      fondoblur.classList.remove("activado");
+    }
+  });
+});
+
+// para centrar la imagen
 articuloImagen.addEventListener("click", () => {
   lightbox.classList.add("active");
 });

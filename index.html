@@ -14,14 +14,15 @@
         />
     </head>
     <body>
-        <nav>
-            <a href="/" class="logo">Spent</a>
-            <div class="nav-links">
-                <a href="#"> login </a>
-                <a href="#"> registrarse </a>
-                <a class="github" href="#"> github </a>
-            </div>
-        </nav>
+        <div class="login-registro">
+            <button popovertarget="dialogLogin">Iniciar sesion</button>
+            <button popovertarget="dialogRegistro">Crear cuenta</button>
+        </div>
+
+        <div id="dialogLogin" popover></div>
+        <div id="dialogRegistro" popover></div>
+
+        <div class="fondoblur"></div>
 
         <div class="contenedor">
             <aside class="sidebar">
@@ -288,6 +289,6 @@
             <img src="src/assets/mockup-spent.png" alt="Spent" />
         </div>
 
-        <script src="src/javascript/index.js"></script>
+        <script type="module" src="src/javascript/index.js" defer></script>
     </body>
 </html>

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: none;
+}
+
 ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -32,15 +36,101 @@ body {
     color: #000;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    position: relative;
 }
 
-a {
-    color: #000;
-    text-decoration: none;
+.login-registro {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 200;
+    width: 250px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
-a:hover {
-    text-decoration: underline;
+.login-registro button {
+    width: 50%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        background-color 200ms ease,
+        transform 200ms ease;
+}
+
+.login-registro button.activo {
+    background-color: whitesmoke;
+    transform: scale(1.05);
+    font-size: 12px;
+    z-index: 200;
+}
+
+.login-registro button:nth-child(1) {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.login-registro button:nth-child(2) {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.fondoblur {
+    position: fixed;
+    inset: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    display: none;
+}
+
+.fondoblur.activado {
+    display: block;
+}
+
+#dialogLogin {
+    width: 300px;
+    height: 200px;
+    animation: aparecerppver 300ms forwards;
+}
+
+#dialogRegistro {
+    width: 300px;
+    height: 200px;
+    animation: aparecerppver 300ms forwards;
+}
+
+#dialogLogin:popover-open,
+#dialogRegistro:popover-open {
+    position: fixed;
+    top: 15%;
+    left: 98%;
+    transform: translate(-98%, -10%);
+    z-index: 200;
+    display: block;
+    border: none;
+    border-radius: 21px;
+}
+
+@keyframes aparecerppver {
+    from {
+        opacity: 0;
+        transform: translateY(-5%) translateX(-98%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-15%) translateX(-98%);
+    }
 }
 
 .contenedor {
@@ -49,44 +139,6 @@ a:hover {
     max-width: 1400px;
     margin: 0 auto;
     min-height: 100vh;
-}
-
-/* Nav */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.nav-links a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #666;
-}
-
-.nav-links a:hover {
-    color: #000;
 }
 
 /* Sidebar */
