@@ -4,6 +4,17 @@ const articuloImagen = document.querySelector(".articulo img");
 const botones = document.querySelectorAll(".login-registro button");
 const fondoblur = document.querySelector(".fondoblur");
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const popovers = document.querySelectorAll(":popover-open");
+    popovers.forEach((popover) => {
+      popover.hidePopover();
+    });
+    fondoblur.classList.remove("activado");
+    botones.forEach((b) => b.classList.remove("activo"));
+  }
+});
+
 botones.forEach((boton) => {
   boton.addEventListener("click", () => {
     const estaActivo = boton.classList.contains("activo");
