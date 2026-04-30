@@ -22,14 +22,19 @@
         <div id="dialogLogin" popover>
             <form id="formLogin">
                 <div class="boxInputs">
-                    <input type="email" placeholder="Ingresa tu email" />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Ingresa tu email"
+                    />
                     <input
                         type="password"
+                        name="contrasena"
                         placeholder="Ingresa tu contraseña"
                     />
                 </div>
                 <div class="boxButton">
-                    <button>Entrar</button>
+                    <button type="submit">Entrar</button>
                 </div>
             </form>
         </div>
@@ -39,9 +44,19 @@
                 <div class="boxInputs">
                     <input
                         placeholder="Ingresa un correo electronico (email unico)"
+                        name="email"
+                        type="email"
                     />
-                    <input placeholder="Ingresa un nombre " />
-                    <input placeholder="Ingresa una contraseña" />
+                    <input
+                        placeholder="Ingresa un nombre "
+                        name="nombre"
+                        type="text"
+                    />
+                    <input
+                        placeholder="Ingresa una contraseña"
+                        type="password"
+                        name="contrasena"
+                    />
                 </div>
                 <div class="boxButton">
                     <button>Crear cuenta</button>

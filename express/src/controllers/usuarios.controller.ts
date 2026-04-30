@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 // manear la respuesta y peticion del server
 export const registrarUsuarios = async (req: Request, res: Response) => {
   const { email, nombre, contrasena } = req.body; // obtener el contenido de los inputs enviados por form
+  console.log("datos desde backend", email, nombre, contrasena);
 
   // funcion para verificar si existe el usuario usando el tipado de usuarios
   const existente = (email: string) => {
@@ -46,7 +47,7 @@ export const registrarUsuarios = async (req: Request, res: Response) => {
 // funcion para iniciar sesion
 export const login = async (req: Request, res: Response) => {
   const { email, contrasena } = req.body; // obtener el contenido de los inputs enviados por form
-
+  console.log("datos desde backend", email, contrasena);
   // funcion para obtneer los datos del usuario
   const obtenerUsuario = (email: string) => {
     // la primera coincidencia que encuentre lo tomamos
