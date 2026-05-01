@@ -2,7 +2,7 @@ import { conexion } from "../lib/local/Database"; // importa la conexion a db pa
 import bcrypt from "bcryptjs"; // para encriptar las contrasñeas y no esten en texto plano
 import type { Usuarios } from "../types/usuarios"; // el tipado de los datos de usuarios
 import type { Request, Response } from "express"; // para usar response y request
-import jwt from "jsonwebtoken";
+import jwt, { type JwtPayload } from "jsonwebtoken";
 
 // manear la respuesta y peticion del server
 export const registrarUsuarios = async (req: Request, res: Response) => {
@@ -93,4 +93,25 @@ export const login = async (req: Request, res: Response) => {
   );
   // retornar el token
   return res.status(200).json({ token });
+};
+
+// verificar si el token es valido
+export const verificarToken = async (req: Request, res: Response) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ error: "No tiene token" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decodificar = jwt.verify(
+      token,
+      process.env.JWT_SECRET!,
+    ) as JwtPayload;
+    return res.status(200).json({ valid: true, usuario: decodificar });
+  } catch (error) {
+    return res.status(401).json({ error: "Token invalido o expirado" });
+  }
 };

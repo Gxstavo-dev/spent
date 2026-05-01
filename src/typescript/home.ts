@@ -1,15 +1,15 @@
 import { obtenerToken } from "./home/token";
 import { cerrarSesion } from "./home/cerrarSesion";
 
-const logout = document.getElementById("logout") as HTMLButtonElement;
+const logout = document?.getElementById("logout") as HTMLButtonElement;
 
-// almacenar el token y es que esta guardado
+// verificar que el token exista y sea valido
 const usuario = obtenerToken();
 
 if (!usuario) {
   console.error("No contiene token");
+  window.location.href = "../index.html";
 } else {
-  // guardamos el id y email que nos envia desde el backend
   const idUsuario = usuario.id;
   const email = usuario.email;
   console.log(idUsuario);
