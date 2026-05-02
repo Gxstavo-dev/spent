@@ -13,6 +13,7 @@
         "dotenv": "^17.4.2",
         "express": "^5.2.1",
         "jsonwebtoken": "^9.0.3",
+        "lucide-static": "^1.14.0",
       },
       "devDependencies": {
         "@tauri-apps/cli": "^2",
@@ -355,6 +356,8 @@
     "lodash.isstring": ["lodash.isstring@4.0.1", "", {}, "sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw=="],
 
     "lodash.once": ["lodash.once@4.1.1", "", {}, "sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg=="],
+
+    "lucide-static": ["lucide-static@1.14.0", "", {}, "sha512-QnAHXC1nk8IXRBmO5ee9JcPiKEVeqf06tKF0bZipxlV++bwUVqvvliC3KA+beDg2lod+WXYIhHde5pQRHkUmqA=="],
 
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 

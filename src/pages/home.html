@@ -4,13 +4,407 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../styles/home.css" />
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <div class="contenedor">
-            <button id="logout">Cerrar sesion</button>
-            <div class="menuside"></div>
-            <div class="mainbox"></div>
+            <aside class="barra-lateral" id="sidebar">
+                <!-- Encabezado -->
+                <div class="encabezado-barra">
+                    <span
+                        class="herramienta texto-xs texto-silenciado"
+                        data-tooltip="Aplicación de control de gastos"
+                        >Spent</span
+                    >
+                    <button
+                        id="logout"
+                        style="
+                            font-size: 10px;
+                            position: fixed;
+                            display: flex;
+                            gap: 5px;
+                            align-items: center;
+                            top: 12px;
+                            right: 86%;
+                            border: none;
+                            background-color: whitesmoke;
+                            cursor: pointer;
+                        "
+                    >
+                        <i data-lucide="log-out" class="icono"></i>
+                        Cerrar cuenta
+                    </button>
+                </div>
+
+                <!-- seccion resumen -->
+                <div class="seccion-barra">
+                    <span class="etiqueta-seccion">Resumen</span>
+                    <div class="espaciado-y-1">
+                        <div
+                            class="herramienta flex-entre texto-xs"
+                            data-tooltip="Total de gastos del mes actual"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i data-lucide="credit-card" class="icono"></i>
+                                <span>Gastos</span>
+                            </div>
+                            <span class="texto-rojo">$0</span>
+                        </div>
+                        <div
+                            class="herramienta flex-entre texto-xs"
+                            data-tooltip="Presupuesto mensual configurado"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i data-lucide="wallet" class="icono"></i>
+                                <span>Presupuesto</span>
+                            </div>
+                            <span class="texto-silenciado">$0</span>
+                        </div>
+                        <div
+                            class="herramienta flex-entre texto-xs"
+                            data-tooltip="Balance total del mes (ingresos - gastos)"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i data-lucide="dollar-sign" class="icono"></i>
+                                <span>Total de mes</span>
+                            </div>
+                            <span class="texto-silenciado">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- seccion favoritos -->
+                <div class="seccion-barra">
+                    <button
+                        class="alternar-seccion herramienta"
+                        data-tooltip="Acceso rápido a elementos favoritos"
+                    >
+                        <div
+                            class="flexible elementos-centro espacio-1-5 texto-xs"
+                        >
+                            <i data-lucide="star" class="icono icono-ambar"></i>
+                            <span>Favoritos</span>
+                        </div>
+                    </button>
+                    <div class="subseccion" id="favorites-content">
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Ver todos los gastos"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="chevron-right"
+                                    class="icono icono-sm"
+                                ></i>
+                                <span>Gastos</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Ver todos los ingresos"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="chevron-right"
+                                    class="icono icono-sm"
+                                ></i>
+                                <span>Ingresos</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- seccion categorias  -->
+                <div class="seccion-barra flex-1 desbordamiento-auto">
+                    <button
+                        class="alternar-seccion herramienta"
+                        data-tooltip="Filtrar por categoría de gasto"
+                    >
+                        <div
+                            class="flexible elementos-centro espacio-1-5 texto-xs"
+                        >
+                            <i data-lucide="layout-grid" class="icono"></i>
+                            <span>Categorías</span>
+                        </div>
+                        <div class="flexible elementos-centro espacio-1">
+                            <span class="insignia">0</span>
+                        </div>
+                    </button>
+                    <div class="subseccion" id="categories-content">
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Gastos personales"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="user"
+                                    class="icono icono-azul"
+                                ></i>
+                                <span>Personal</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Alimentación y restaurantes"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="utensils"
+                                    class="icono icono-rojo-claro"
+                                ></i>
+                                <span>Comida</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Gasolina, transporte público"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="car"
+                                    class="icono icono-azul-claro"
+                                ></i>
+                                <span>Transporte</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Ingresos y gastos laborales"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="briefcase"
+                                    class="icono icono-ambar"
+                                ></i>
+                                <span>Trabajo</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Médicos, medicinas, gym"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="heart"
+                                    class="icono icono-verde-azulado"
+                                ></i>
+                                <span>Salud</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Streaming, cine, diversión"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="film"
+                                    class="icono icono-verde"
+                                ></i>
+                                <span>Entretenimiento</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Renta, servicios, hogar"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="home"
+                                    class="icono icono-ambar-claro"
+                                ></i>
+                                <span>Hogar</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Vestimenta y accesorios"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="shirt"
+                                    class="icono icono-gris"
+                                ></i>
+                                <span>Ropa</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Cursos, libros, educación"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="graduation-cap"
+                                    class="icono icono-rojo-oscuro"
+                                ></i>
+                                <span>Educacion</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                        <button
+                            class="elemento-categoria"
+                            data-tooltip="Gastos sin categoría"
+                        >
+                            <div class="flexible elementos-centro espacio-2">
+                                <i
+                                    data-lucide="circle-dot"
+                                    class="icono icono-gris-oscuro"
+                                ></i>
+                                <span>Otros</span>
+                            </div>
+                            <span class="insignia">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- seccion de opciones  -->
+                <div class="seccion-barra">
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Configurar preferencias de la app"
+                    >
+                        <i data-lucide="settings" class="icono"></i>
+                        <span>Ajustes</span>
+                    </button>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Ver perfil y configuración de cuenta"
+                    >
+                        <i data-lucide="user" class="icono"></i>
+                        <span>Cuenta</span>
+                    </button>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Importar, exportar o sincronizar datos"
+                    >
+                        <i data-lucide="database" class="icono"></i>
+                        <span>Migrar Database</span>
+                    </button>
+                </div>
+
+                <!-- seccion Footer  -->
+                <div class="pie-barra">
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Información sobre la aplicación"
+                    >
+                        <i data-lucide="info" class="icono"></i>
+                        <span>Sobre spent</span>
+                    </button>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Aprende a usar Spent"
+                    >
+                        <i data-lucide="book" class="icono"></i>
+                        <span>Guia de uso</span>
+                    </button>
+                    <div class="flex-entre texto-xs">
+                        <button
+                            class="boton-barra herramienta"
+                            data-tooltip="Enviar comentarios o reportar problemas"
+                        >
+                            <i data-lucide="message-square" class="icono"></i>
+                            <span>FeedBack</span>
+                        </button>
+                        <span
+                            class="herramienta texto-[10px]"
+                            data-tooltip="Versión actual de Spent"
+                            >V. 1.0.0</span
+                        >
+                    </div>
+                </div>
+            </aside>
+
+            <div class="caja-principal"></div>
         </div>
+
+        <!-- seccion del menu inferior -->
+        <div class="menu-inferior">
+            <div class="seccion-izquierda">
+                <p
+                    style="
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <i data-lucide="refresh-cw" class="icono"></i> No
+                    sincronizado
+                </p>
+                <p
+                    style="
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <i data-lucide="user" class="icono"></i>
+                    Cuenta:Ejemplo@gmail.com
+                </p>
+            </div>
+            <div class="seccion-medio">
+                <p
+                    style="
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <i data-lucide="credit-card" class="icono"></i> Gastos:0
+                </p>
+                <p
+                    style="
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <i data-lucide="layout-grid" class="icono"></i>
+                    Categorias:0
+                </p>
+                <p style="display: flex; gap: 5px">
+                    <i data-lucide="dollar-sign" class="icono"></i> Total del
+                    mes: $0.00
+                </p>
+            </div>
+            <div class="seccion-derecha">
+                <p>Vista:--/--</p>
+                <p>Presupuesto restante:$0</p>
+                <button
+                    class="feedback-menu-inferior"
+                    style="
+                        display: flex;
+                        gap: 5px;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <i data-lucide="message-square" class="icono"></i> Feedback
+                </button>
+            </div>
+        </div>
+
+        <script>
+            lucide.createIcons();
+        </script>
+        <script type="module" src="../typescript/home.ts"></script>
     </body>
-    <script type="module" src="../typescript/home.ts"></script>
 </html>
