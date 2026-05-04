@@ -1,6 +1,8 @@
-import { obtenerToken } from "./home/token";
-import { cerrarSesion } from "./home/cerrarSesion";
-import { logout } from "./home/elementos";
+import { obtenerToken } from "./home/token.js";
+import { cerrarSesion } from "./home/cerrarSesion.js";
+import { logout } from "./home/elementos.js";
+import "./home/ui.js";
+
 // verificar que el token exista y sea valido
 const usuario = obtenerToken();
 

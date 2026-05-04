@@ -81,6 +81,7 @@
                 <!-- seccion favoritos -->
                 <div class="seccion-barra">
                     <button
+                        id="favoritos"
                         class="alternar-seccion herramienta"
                         data-tooltip="Acceso rápido a elementos favoritos"
                     >
@@ -95,6 +96,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Ver todos los gastos"
+                            id="Gastos"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -108,6 +110,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Ver todos los ingresos"
+                            id="Ingresos"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -126,6 +129,7 @@
                     <button
                         class="alternar-seccion herramienta"
                         data-tooltip="Filtrar por categoría de gasto"
+                        id="Categorias"
                     >
                         <div
                             class="flexible elementos-centro espacio-1-5 texto-xs"
@@ -141,6 +145,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Gastos personales"
+                            id="Personal"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -154,6 +159,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Alimentación y restaurantes"
+                            id="Comida"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -167,6 +173,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Gasolina, transporte público"
+                            id="Transporte"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -180,6 +187,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Ingresos y gastos laborales"
+                            id="Trabajo"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -193,6 +201,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Médicos, medicinas, gym"
+                            id="Salud"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -206,6 +215,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Streaming, cine, diversión"
+                            id="Entretenimiento"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -219,6 +229,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Renta, servicios, hogar"
+                            id="Hogar"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -232,6 +243,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Vestimenta y accesorios"
+                            id="Ropa"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -245,6 +257,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Cursos, libros, educación"
+                            id="Educacion"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -258,6 +271,7 @@
                         <button
                             class="elemento-categoria"
                             data-tooltip="Gastos sin categoría"
+                            id="Otros"
                         >
                             <div class="flexible elementos-centro espacio-2">
                                 <i
@@ -276,6 +290,7 @@
                     <button
                         class="boton-barra herramienta"
                         data-tooltip="Configurar preferencias de la app"
+                        id="Ajustes"
                     >
                         <i data-lucide="settings" class="icono"></i>
                         <span>Ajustes</span>
@@ -283,6 +298,7 @@
                     <button
                         class="boton-barra herramienta"
                         data-tooltip="Ver perfil y configuración de cuenta"
+                        id="Cuenta"
                     >
                         <i data-lucide="user" class="icono"></i>
                         <span>Cuenta</span>
@@ -290,6 +306,7 @@
                     <button
                         class="boton-barra herramienta"
                         data-tooltip="Importar, exportar o sincronizar datos"
+                        id="Nube"
                     >
                         <i data-lucide="database" class="icono"></i>
                         <span>Migrar Database</span>
@@ -301,6 +318,7 @@
                     <button
                         class="boton-barra herramienta"
                         data-tooltip="Información sobre la aplicación"
+                        id="SobreSpent"
                     >
                         <i data-lucide="info" class="icono"></i>
                         <span>Sobre spent</span>
@@ -308,6 +326,7 @@
                     <button
                         class="boton-barra herramienta"
                         data-tooltip="Aprende a usar Spent"
+                        id="Guia"
                     >
                         <i data-lucide="book" class="icono"></i>
                         <span>Guia de uso</span>
@@ -316,6 +335,7 @@
                         <button
                             class="boton-barra herramienta"
                             data-tooltip="Enviar comentarios o reportar problemas"
+                            id="Feedback"
                         >
                             <i data-lucide="message-square" class="icono"></i>
                             <span>FeedBack</span>
@@ -329,8 +349,23 @@
                 </div>
             </aside>
 
+            <!-- subBarra-lateral -->
+
+            <div class="subBarralateral"></div>
+            <!-- Submenu-lateral -->
+
             <div class="caja-principal"></div>
         </div>
+
+        <!-- ventanas flotantes -->
+        <div id="ventana_Ajustes"></div>
+        <div id="ventana_Cuenta"></div>
+        <div id="ventana_MigrarDatabase"></div>
+        <div id="ventana_Acercade-spent"></div>
+        <div id="ventana_Guia"></div>
+        <div id="ventana_Feedback"></div>
+
+        <!-- ventanas flotantes -->
 
         <!-- seccion del menu inferior -->
         <div class="menu-inferior">
@@ -405,6 +440,6 @@
         <script>
             lucide.createIcons();
         </script>
-        <script type="module" src="../typescript/home.ts"></script>
+        <script type="module" src="../typescript/home.ts" defer></script>
     </body>
 </html>
