@@ -12,14 +12,16 @@
   "app": {
     "withGlobalTauri": true,
     "windows": [
-      {
-        "title": "spent",
-        "width": 1200,
-        "height": 650,
-        "resizable": false,
-        "decorations": false
-      }
-    ],
+        {
+          "title": "spent",
+          "width": 1200,
+          "height": 650,
+          "decorations": false,
+          "resizable": true,
+          "minWidth": 1200,
+          "minHeight": 650
+        }
+      ],
     "security": {
       "csp": null
     }

@@ -132,3 +132,34 @@ import path from "path";
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 ```
+
+---
+
+## 12. Popovers de login y registro se cierran al hacer clic fuera
+**Error:** Los dialogos de login y registro desaparecen cuando el usuario hace clic fuera del popover.
+
+**Causa:** Los popovers usaban el comportamiento por defecto (`popover` sin especificar) que cierra automaticamente al hacer clic fuera.
+
+**Solucion:** Usar `popover="manual"` para controlar manualmente cuándo se abre/cierra.
+```html
+<!-- Antes -->
+<div id="dialogLogin" popover>
+
+<!-- Después -->
+<div id="dialogLogin" popover="manual">
+```
+```typescript
+// Manejar el toggle manualmente con JavaScript
+const dialogLogin = document.getElementById("dialogLogin") as HTMLElement;
+const btnLogin = document.getElementById("btnLogin") as HTMLButtonElement;
+
+btnLogin.addEventListener("click", () => {
+  const estaAbierto = dialogLogin.matches(":popover-open");
+  
+  if (estaAbierto) {
+    dialogLogin.hidePopover();
+  } else {
+    dialogLogin.showPopover();
+  }
+});
+```

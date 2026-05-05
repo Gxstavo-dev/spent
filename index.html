@@ -15,11 +15,11 @@
     </head>
     <body>
         <div class="login-registro">
-            <button popovertarget="dialogLogin">Iniciar sesion</button>
-            <button popovertarget="dialogRegistro">Crear cuenta</button>
+            <button id="btnLogin">Iniciar sesion</button>
+            <button id="btnRegistro">Crear cuenta</button>
         </div>
 
-        <div id="dialogLogin" popover>
+        <div id="dialogLogin" popover="manual">
             <form id="formLogin">
                 <div class="boxInputs">
                     <input
@@ -39,7 +39,7 @@
             </form>
         </div>
 
-        <div id="dialogRegistro" popover>
+        <div id="dialogRegistro" popover="manual">
             <form id="formRegistro">
                 <div class="boxInputs">
                     <input
