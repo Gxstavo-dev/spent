@@ -1,5 +1,14 @@
 export const logout = document.getElementById("logout") as HTMLElement;
 
+// subBarra lateral
+export const subBarralateral = document.getElementById(
+  "subBarralateral",
+) as HTMLElement;
+
+// sidebar
+
+export const sidebar = document.getElementById("sidebar") as HTMLElement;
+
 // botones de para las diferentes secciones
 export const btnFavoritos = document.getElementById("favoritos") as HTMLElement;
 export const btnGastos = document.getElementById("Gastos") as HTMLElement;
