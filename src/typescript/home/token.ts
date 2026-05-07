@@ -1,15 +1,15 @@
-// obtener el token guardado
+// obtiene el token del localStorage y lo decodifica para extraer los datos del usuario
 export function obtenerToken() {
-  const token = localStorage.getItem("token"); // lo habiamos almacenado en localStorage
+  const token = localStorage.getItem("token");
 
   try {
     if (!token) {
       return null;
     }
 
-    // tomar solo la segunda parte del token
+    // el token JWT tiene 3 partes separadas por puntos, la segunda parte tiene los datos del usuario
     const dividirToken = token.split(".")[1];
-    // atob para convertirlo en texto plano de base 64
+    // decodificamos de base64 a JSON y lo retornamos como objeto
     const decodificarToken = JSON.parse(atob(dividirToken));
     return decodificarToken;
   } catch (error) {

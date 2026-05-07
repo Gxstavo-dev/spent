@@ -10,8 +10,10 @@ import "./home/ingreso.js";
 import "./home/gasto.js";
 import "./home/presupuesto.js";
 import "./home/resumen.js";
+import "./home/ingresosList.js";
+import "./home/detalle.js";
 
-// verificar que el token exista y sea valido
+// verificamos que el usuario tenga un token valido antes de cargar la pagina
 const usuario = obtenerToken();
 
 if (!usuario) {
@@ -19,6 +21,7 @@ if (!usuario) {
   window.location.href = "../index.html";
 }
 
+// asignamos el evento de cierre de sesion al boton de logout
 logout.addEventListener("click", () => {
   cerrarSesion();
 });

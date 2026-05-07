@@ -1,3 +1,4 @@
+// referencias a los elementos del formulario de registro de ingreso
 const cerrarIngreso = document.getElementById("btnCerrarIngreso") as HTMLButtonElement;
 const guardarIngreso = document.getElementById("btnGuardarIngreso") as HTMLButtonElement;
 const dialogIngreso = document.getElementById("ventana_Ingreso") as HTMLDialogElement;
@@ -5,10 +6,13 @@ const montoIngreso = document.getElementById("ingresoMonto") as HTMLInputElement
 const descIngreso = document.getElementById("ingresoDescripcion") as HTMLInputElement;
 const fechaIngreso = document.getElementById("ingresoFecha") as HTMLInputElement;
 
+// establece la fecha actual como valor predeterminado en el campo de fecha
 fechaIngreso.value = new Date().toISOString().split("T")[0];
 
+// cierra el modal sin enviar los datos del formulario
 cerrarIngreso.addEventListener("click", () => dialogIngreso.close());
 
+// envia los datos del nuevo ingreso al backend mediante POST
 guardarIngreso.addEventListener("click", async () => {
   const token = localStorage.getItem("token");
   if (!token) return;

@@ -1,50 +1,50 @@
-// importamos los tipos de express para poder usar Request y Response
 import type { Request, Response } from "express";
-// importamos la conexion a la base de datos para poder hacer consultas
 import { conexion } from "../../lib/local/Database";
-// importamos la funcion que obtiene el usuario desde el token
 import { obtenerUsuarioDeToken } from "../../lib/auth";
 
-// esta funcion se ejecuta cuando alguien hace un DELETE a /transacciones/datos
+// Importaciones:
+// Request, Response - tipos de Express para manejar solicitudes y respuestas HTTP
+// conexion - conexion a la base de datos local SQLite
+// obtenerUsuarioDeToken - funcion auxiliar para extraer el usuario autenticado del token JWT
+
+// Controlador que elimina todos los datos financieros del usuario autenticado (DELETE /transacciones/datos)
+// Elimina gastos, ingresos y presupuestos asociados al usuario (NO elimina la cuenta de usuario)
+// Retorna: 200 si se eliminaron correctamente, 401 si no esta autenticado
 export const eliminarDatos = async (req: Request, res: Response) => {
-  // obtenemos el usuario actual desde el token que envio en el header
+  // Obtenemos el usuario autenticado a partir del token
   const usuario = obtenerUsuarioDeToken(req);
 
-  // si no hay usuario significa que el token no es valido o no envio token
+  // Verificamos que el usuario este autenticado
   if (!usuario) {
     return res.status(401).json({ error: "No autorizado" });
   }
 
-  // guardamos el id del usuario para usarlo en las consultas
+  // Identificador del usuario autenticado
   const idUsuario = usuario.id;
 
-  // intentamos eliminar todos los datos del usuario
   try {
-    // primero eliminamos las notas del usuario
-    await conexion.execute({
-      sql: "DELETE FROM notas WHERE idUsuario = ?",
-      args: [idUsuario],
-    });
-    // luego eliminamos los gastos del usuario
+    // Eliminamos todos los gastos asociados al usuario
     await conexion.execute({
       sql: "DELETE FROM gastos WHERE idUsuario = ?",
       args: [idUsuario],
     });
-    // luego eliminamos los ingresos del usuario
+
+    // Eliminamos todos los ingresos asociados al usuario
     await conexion.execute({
       sql: "DELETE FROM ingresos WHERE idUsuario = ?",
       args: [idUsuario],
     });
-    // por ultimo eliminamos los presupuestos del usuario
+
+    // Eliminamos todos los presupuestos asociados al usuario
     await conexion.execute({
       sql: "DELETE FROM presupuesto WHERE idUsuario = ?",
       args: [idUsuario],
     });
 
-    // devolvemos respuesta exitosa
+    // Retornamos respuesta exitosa
     return res.status(200).json({ status: "ok" });
   } catch (error) {
-    // si algo sale mal lo mostramos en consola y devolvemos error 500
+    // Capturamos cualquier error en la operacion de base de datos
     console.error("Error al eliminar datos:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }

@@ -1,52 +1,66 @@
-// importamos los tipos de express para poder usar Request y Response
 import type { Request, Response } from "express";
-// importamos la conexion a la base de datos para poder hacer consultas
 import { conexion } from "../../lib/local/Database";
-// importamos la funcion que obtiene el usuario desde el token
 import { obtenerUsuarioDeToken } from "../../lib/auth";
 
-// esta funcion se ejecuta cuando alguien hace un GET a /transacciones/resumen
+// Importaciones:
+// Request, Response - tipos de Express para manejar solicitudes y respuestas HTTP
+// conexion - conexion a la base de datos local SQLite
+// obtenerUsuarioDeToken - funcion auxiliar para extraer el usuario autenticado del token JWT
+
+// Controlador que obtiene el resumen financiero del mes actual (GET /transacciones/resumen)
+// Parametros de consulta opcionales: ?categoria=Comida (filtra solo los gastos de esa categoria)
+// Retorna: 200 con gastos, ingresos, presupuesto y balance del mes, 401 si no esta autenticado
 export const obtenerResumen = async (req: Request, res: Response) => {
-  // obtenemos el usuario actual desde el token que envio en el header
+  // Obtenemos el usuario autenticado a partir del token
   const usuario = obtenerUsuarioDeToken(req);
 
-  // si no hay usuario significa que el token no es valido o no envio token
+  // Verificamos que el usuario este autenticado
   if (!usuario) {
     return res.status(401).json({ error: "No autorizado" });
   }
 
-  // guardamos el id del usuario para usarlo en las consultas
+  // Identificador del usuario autenticado
   const idUsuario = usuario.id;
 
-  // obtenemos la fecha actual para saber que mes y año estamos consultando
+  // Obtenemos la fecha actual para calcular el mes y año en curso
   const ahora = new Date();
-  const mesActual = ahora.getMonth() + 1; // getMonth empieza en 0, por eso sumamos 1
+  const mesActual = ahora.getMonth() + 1; // getMonth() devuelve valores de 0 a 11, sumamos 1 para obtener 1-12
   const anioActual = ahora.getFullYear();
 
-  // intentamos hacer las consultas a la base de datos
-  try {
-    // consultamos el total de gastos del mes actual para este usuario
-    // usamos strftime para extraer el mes y año de la columna fecha
-    const totalGastos = await conexion.execute({
-      sql: "SELECT COALESCE(SUM(monto), 0) as total FROM gastos WHERE idUsuario = ? AND strftime('%m', fecha) = ? AND strftime('%Y', fecha) = ?",
-      // padStart es para que el mes siempre tenga 2 digitos (01, 02, etc.)
-      args: [idUsuario, String(mesActual).padStart(2, "0"), String(anioActual)],
-    });
+  // Filtro opcional de categoria desde los parametros de consulta (query string)
+  const categoria = req.query.categoria as string | undefined;
 
-    // consultamos el total de ingresos del mes actual para este usuario
+  try {
+    // Variable para almacenar el resultado de la consulta de gastos
+    let totalGastos;
+
+    // Si hay filtro de categoria, calculamos el total de gastos solo para esa categoria en el mes actual
+    if (categoria) {
+      totalGastos = await conexion.execute({
+        sql: "SELECT COALESCE(SUM(monto), 0) as total FROM gastos WHERE idUsuario = ? AND categoria = ? AND strftime('%m', fecha) = ? AND strftime('%Y', fecha) = ?",
+        args: [idUsuario, categoria, String(mesActual).padStart(2, "0"), String(anioActual)],
+      });
+    } else {
+      // Si no hay filtro, calculamos el total de todos los gastos del mes actual
+      totalGastos = await conexion.execute({
+        sql: "SELECT COALESCE(SUM(monto), 0) as total FROM gastos WHERE idUsuario = ? AND strftime('%m', fecha) = ? AND strftime('%Y', fecha) = ?",
+        args: [idUsuario, String(mesActual).padStart(2, "0"), String(anioActual)],
+      });
+    }
+
+    // Calculamos el total de ingresos del mes actual
     const totalIngresos = await conexion.execute({
       sql: "SELECT COALESCE(SUM(monto), 0) as total FROM ingresos WHERE idUsuario = ? AND strftime('%m', fecha) = ? AND strftime('%Y', fecha) = ?",
       args: [idUsuario, String(mesActual).padStart(2, "0"), String(anioActual)],
     });
 
-    // consultamos el presupuesto configurado para este mes y año
+    // Obtenemos el presupuesto establecido para el mes y año actuales
     const presupuesto = await conexion.execute({
       sql: "SELECT monto FROM presupuesto WHERE idUsuario = ? AND mes = ? AND anio = ? LIMIT 1",
       args: [idUsuario, mesActual, anioActual],
     });
 
-    // extraemos los valores de las consultas, si no hay datos usamos 0
-    // usamos "as unknown as" porque el tipo Row no coincide exactamente
+    // Extraemos los valores de las consultas, usando 0 como valor predeterminado si no hay datos
     const gastos =
       (totalGastos.rows[0] as unknown as { total: number } | undefined)?.total || 0;
     const ingresos =
@@ -54,16 +68,17 @@ export const obtenerResumen = async (req: Request, res: Response) => {
     const presupuestoMonto =
       (presupuesto.rows[0] as unknown as { monto: number } | undefined)?.monto || 0;
 
-    // devolvemos los datos al frontend
-    // balance es lo que sobra: ingresos - gastos
+    // Retornamos el resumen financiero
+    // Si hay filtro de categoria, los ingresos se muestran como 0 (no aplican al filtro)
+    // El balance se calcula como ingresos - gastos (o solo gastos si hay filtro de categoria)
     return res.status(200).json({
       gastos,
-      ingresos,
+      ingresos: categoria ? 0 : ingresos,
       presupuesto: presupuestoMonto,
-      balance: ingresos - gastos,
+      balance: categoria ? gastos : ingresos - gastos,
     });
   } catch (error) {
-    // si algo sale mal lo mostramos en consola y devolvemos error 500
+    // Capturamos cualquier error en la operacion de base de datos
     console.error("Error al obtener resumen:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }

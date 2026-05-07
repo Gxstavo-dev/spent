@@ -1,66 +1,75 @@
-// importamos los tipos de express para poder usar Request y Response
 import type { Request, Response } from "express";
-// importamos la conexion a la base de datos para poder hacer consultas
 import { conexion } from "../../lib/local/Database";
-// importamos la funcion que obtiene el usuario desde el token
 import { obtenerUsuarioDeToken } from "../../lib/auth";
-// importamos bcrypt para encriptar la nueva contraseña
 import bcrypt from "bcryptjs";
 
-// esta funcion se ejecuta cuando alguien hace un PUT a /usuarios/cambiar-contrasena
+// Importaciones:
+// Request, Response - tipos de Express para manejar solicitudes y respuestas HTTP
+// conexion - conexion a la base de datos local SQLite
+// obtenerUsuarioDeToken - funcion auxiliar para extraer el usuario autenticado del token JWT
+// bcrypt - biblioteca para encriptar y comparar contraseñas de forma segura
+
+// Controlador que cambia la contraseña del usuario autenticado (PUT /usuarios/cambiar-contrasena)
+// Parametros del cuerpo: contrasenaActual (string), contrasenaNueva (string, minimo 6 caracteres)
+// Retorna: 200 si se cambio correctamente, 400 si las contraseñas no son validas, 401 si no esta autenticado
 export const cambiarContrasena = async (req: Request, res: Response) => {
-  // obtenemos el usuario actual desde el token que envio en el header
+  // Obtenemos el usuario autenticado a partir del token
   const usuario = obtenerUsuarioDeToken(req);
 
-  // si no hay usuario significa que el token no es valido o no envio token
+  // Verificamos que el usuario este autenticado
   if (!usuario) {
     return res.status(401).json({ error: "No autorizado" });
   }
 
-  // del cuerpo de la peticion sacamos la contraseña actual y la nueva
+  // Extraemos la contraseña actual y la nueva del cuerpo de la solicitud
   const { contrasenaActual, contrasenaNueva } = req.body;
 
-  // validamos que ambos campos existan
+  // Validamos que ambas contraseñas esten presentes
   if (!contrasenaActual || !contrasenaNueva) {
     return res.status(400).json({ error: "Ambas contraseñas son requeridas" });
   }
 
-  // validamos que la nueva contraseña no sea muy corta
+  // Validamos que la nueva contraseña tenga al menos 6 caracteres
   if (contrasenaNueva.length < 6) {
     return res.status(400).json({ error: "La contraseña debe tener al menos 6 caracteres" });
   }
 
   try {
-    // primero obtenemos la contraseña actual del usuario
+    // Obtenemos la contraseña actual almacenada en la base de datos
     const consulta = await conexion.execute({
       sql: "SELECT contrasena FROM usuarios WHERE id = ? LIMIT 1",
       args: [usuario.id],
     });
 
+    // Extraemos el resultado de la consulta
     const datos = consulta.rows[0] as unknown as { contrasena: string } | undefined;
 
+    // Si no se encontro al usuario, retornamos 404
     if (!datos) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    // verificamos que la contraseña actual sea correcta
+    // Verificamos que la contraseña actual proporcionada coincida con la almacenada
     const valida = await bcrypt.compare(contrasenaActual, datos.contrasena);
 
+    // Si la contraseña actual no es correcta, retornamos error
     if (!valida) {
       return res.status(400).json({ error: "La contraseña actual no es correcta" });
     }
 
-    // encriptamos la nueva contraseña
+    // Encriptamos la nueva contraseña con bcrypt usando 10 rondas de sal
     const hash = await bcrypt.hash(contrasenaNueva, 10);
 
-    // actualizamos la contraseña en la base de datos
+    // Actualizamos la contraseña en la base de datos
     await conexion.execute({
       sql: "UPDATE usuarios SET contrasena = ? WHERE id = ?",
       args: [hash, usuario.id],
     });
 
+    // Retornamos respuesta exitosa
     return res.status(200).json({ status: "ok" });
   } catch (error) {
+    // Capturamos cualquier error en la operacion de base de datos
     console.error("Error al cambiar contraseña:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }

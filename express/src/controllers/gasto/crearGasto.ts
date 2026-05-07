@@ -1,40 +1,44 @@
-// importamos los tipos de express para poder usar Request y Response
 import type { Request, Response } from "express";
-// importamos la conexion a la base de datos para poder hacer consultas
 import { conexion } from "../../lib/local/Database";
-// importamos la funcion que obtiene el usuario desde el token
 import { obtenerUsuarioDeToken } from "../../lib/auth";
 
-// esta funcion se ejecuta cuando alguien hace un POST a /transacciones/gasto
+// Importaciones:
+// Request, Response - tipos de Express para manejar solicitudes y respuestas HTTP
+// conexion - conexion a la base de datos local SQLite
+// obtenerUsuarioDeToken - funcion auxiliar para extraer el usuario autenticado del token JWT
+
+// Controlador que maneja la creacion de un nuevo gasto (POST /transacciones/gasto)
+// Parametros del cuerpo (req.body): monto (numero), descripcion (string opcional), categoria (string opcional), fecha (string)
+// Retorna: 201 con el ID del gasto creado, 400 si faltan datos, 401 si no esta autenticado
 export const crearGasto = async (req: Request, res: Response) => {
-  // del cuerpo de la peticion sacamos el monto, la descripcion, la categoria y la fecha
+  // Extraemos los campos del cuerpo de la solicitud
   const { monto, descripcion, categoria, fecha } = req.body;
-  // obtenemos el usuario actual desde el token que envio en el header
+
+  // Obtenemos el usuario autenticado a partir del token en el encabezado
   const usuario = obtenerUsuarioDeToken(req);
 
-  // si no hay usuario significa que el token no es valido o no envio token
+  // Verificamos que el usuario este autenticado
   if (!usuario) {
     return res.status(401).json({ error: "No autorizado" });
   }
 
-  // guardamos el id del usuario para usarlo en la consulta
+  // Extraemos el identificador del usuario autenticado
   const idUsuario = usuario.id;
 
-  // validamos que el monto y la fecha si existan, si no mandamos error
+  // Validamos que los campos obligatorios esten presentes
   if (!monto || !fecha) {
     return res.status(400).json({ error: "Monto y fecha son requeridos" });
   }
 
-  // intentamos hacer la insercion en la base de datos
   try {
-    // ejecutamos la consulta SQL para insertar un nuevo gasto
+    // Ejecutamos la consulta SQL para insertar el gasto en la base de datos
+    // Usamos parametros args para evitar inyeccion SQL
     const consulta = await conexion.execute({
       sql: "INSERT INTO gastos(monto, descripcion, categoria, fecha, idUsuario) VALUES(?,?,?,?,?)",
-      // usamos ? para evitar inyeccion SQL, los valores van en args
       args: [monto, descripcion || null, categoria || null, fecha, idUsuario],
     });
 
-    // si se inserto correctamente (rowsAffected == 1) devolvemos el id creado
+    // Si la insercion afecto exactamente una fila, el gasto se creo correctamente
     if (consulta.rowsAffected === 1) {
       return res.status(201).json({
         status: "ok",
@@ -42,10 +46,10 @@ export const crearGasto = async (req: Request, res: Response) => {
       });
     }
 
-    // si no se pudo insertar mandamos un error 400
+    // Si no se afecto ninguna fila, retornamos un error
     return res.status(400).json({ error: "No se pudo crear el gasto" });
   } catch (error) {
-    // si algo sale mal lo mostramos en consola y devolvemos error 500
+    // Capturamos cualquier error en la operacion de base de datos
     console.error("Error al crear gasto:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   }

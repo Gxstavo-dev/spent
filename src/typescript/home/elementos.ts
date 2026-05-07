@@ -1,20 +1,19 @@
+// referencia al boton de cerrar sesion en la interfaz
 export const logout = document.getElementById("logout") as HTMLElement;
 
-// subBarra lateral
+// referencia a la subbarra lateral que se despliega al seleccionar una categoria
 export const subBarralateral = document.getElementById(
   "subBarralateral",
 ) as HTMLElement;
 
-// sidebar
-
+// referencia a la barra lateral principal donde estan los botones de navegacion
 export const sidebar = document.getElementById("sidebar") as HTMLElement;
 
-// botones de para las diferentes secciones
-export const btnGastos = document.getElementById("Gastos") as HTMLElement;
-export const btnIngresos = document.getElementById("Ingresos") as HTMLElement;
+// botones para filtrar gastos por categoria en la barra lateral
 export const btnCategorias = document.getElementById(
   "Categorias",
 ) as HTMLElement;
+export const btnIngresos = document.getElementById("Ingresos") as HTMLElement;
 export const btnPersonal = document.getElementById("Personal") as HTMLElement;
 export const btnComida = document.getElementById("Comida") as HTMLElement;
 export const btnTransporte = document.getElementById(
@@ -30,8 +29,6 @@ export const btnRopa = document.getElementById("Ropa") as HTMLElement;
 export const btnEducacion = document.getElementById("Educacion") as HTMLElement;
 export const btnOtros = document.getElementById("Otros") as HTMLElement;
 
-// botones para abrir su ventana flotante
+// botones para abrir los modales de ajustes y cuenta de usuario
 export const btnAjustes = document.getElementById("Ajustes") as HTMLElement;
 export const btnCuenta = document.getElementById("Cuenta") as HTMLElement;
-
-

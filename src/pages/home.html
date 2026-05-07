@@ -18,7 +18,7 @@
                 <div class="encabezado-barra">
                     <span
                         class="herramienta texto-xs texto-silenciado"
-                        data-tooltip="Aplicación de control de gastos"
+                        data-tooltip="Aplicacion de control de gastos"
                         >Spent</span
                     >
                 </div>
@@ -61,13 +61,19 @@
                             class="flexible elementos-centro espacio-1-5 texto-xs"
                         >
                             <i data-lucide="layout-grid" class="icono"></i>
-                            <span>Categorías</span>
+                            <span>Categorias</span>
                         </div>
                         <div class="flexible elementos-centro espacio-1">
                             <span class="insignia" id="conteo-total">0</span>
                         </div>
                     </button>
                     <div class="subseccion" id="categories-content">
+                        <button class="elemento-categoria" id="Ingresos">
+                            <div class="flexible elementos-centro espacio-2">
+                                <i data-lucide="trending-up" class="icono icono-verde"></i>
+                                <span>Ingresos</span>
+                            </div>
+                        </button>
                         <button class="elemento-categoria" id="Personal">
                             <div class="flexible elementos-centro espacio-2">
                                 <i data-lucide="user" class="icono icono-azul"></i>
@@ -188,7 +194,7 @@
                     </button>
                     <button
                         class="boton-barra herramienta"
-                        data-tooltip="Ver perfil y configuración de cuenta"
+                        data-tooltip="Ver perfil y configuracion de cuenta"
                         id="Cuenta"
                     >
                         <i data-lucide="user" class="icono"></i>
@@ -200,15 +206,15 @@
                 <div class="pie-barra">
                     <button
                         class="boton-barra herramienta"
-                        data-tooltip="Cerrar sesión"
+                        data-tooltip="Cerrar sesion"
                         id="logout"
                     >
                         <i data-lucide="log-out" class="icono"></i>
-                        <span>Cerrar sesión</span>
+                        <span>Cerrar sesion</span>
                     </button>
                     <span
                         class="herramienta texto-[10px]"
-                        data-tooltip="Versión actual de Spent"
+                        data-tooltip="Version actual de Spent"
                         >V. 1.0.0</span
                     >
                 </div>
@@ -216,11 +222,20 @@
 
             <!-- subBarra-lateral -->
             <div class="subBarralateral" id="subBarralateral">
+                <div class="contenido-subbarra" id="subbarra-ingresos" style="display:none">
+                    <div class="encabezado-subbarra">
+                        <span class="titulo-subbarra">
+                            <i data-lucide="trending-up" class="icono icono-verde"></i>
+                            Ingresos
+                        </span>
+                    </div>
+                    <div class="lista-subbarra" id="lista-ingresos"></div>
+                </div>
                 <div class="contenido-subbarra" id="subbarra-categorias" style="display:none">
                     <div class="encabezado-subbarra">
                         <span class="titulo-subbarra">
                             <i data-lucide="layout-grid" class="icono"></i>
-                            Categorías
+                            Categorias
                         </span>
                     </div>
                     <div class="lista-subbarra" id="lista-gastos-categoria"></div>
@@ -269,7 +284,7 @@
 
                 <div class="pie-ajustes">
                     <span class="texto-xs texto-silenciado"
-                        >Los cambios se guardan automáticamente</span
+                        >Los cambios se guardan automaticamente</span
                     >
                 </div>
             </div>
@@ -340,7 +355,7 @@
                             id="btnCerrarSesionCuenta"
                         >
                             <i data-lucide="log-out" class="icono"></i>
-                            <span>Cerrar sesión</span>
+                            <span>Cerrar sesion</span>
                         </button>
                     </div>
                 </div>
@@ -363,7 +378,7 @@
                         <input type="number" class="input-form" id="ingresoMonto" placeholder="0.00" step="0.01" min="0">
                     </div>
                     <div class="grupo-form">
-                        <label class="etiqueta-form">Descripción</label>
+                        <label class="etiqueta-form">Descripcion</label>
                         <input type="text" class="input-form" id="ingresoDescripcion" placeholder="Ej: Salario mensual">
                     </div>
                     <div class="grupo-form">
@@ -395,11 +410,11 @@
                         <input type="number" class="input-form" id="gastoMonto" placeholder="0.00" step="0.01" min="0">
                     </div>
                     <div class="grupo-form">
-                        <label class="etiqueta-form">Descripción</label>
+                        <label class="etiqueta-form">Descripcion</label>
                         <input type="text" class="input-form" id="gastoDescripcion" placeholder="Ej: Comida del mes">
                     </div>
                     <div class="grupo-form">
-                        <label class="etiqueta-form">Categoría</label>
+                        <label class="etiqueta-form">Categoria</label>
                         <select class="select-form" id="gastoCategoria">
                             <option value="Personal">Personal</option>
                             <option value="Comida">Comida</option>
@@ -409,7 +424,7 @@
                             <option value="Entretenimiento">Entretenimiento</option>
                             <option value="Hogar">Hogar</option>
                             <option value="Ropa">Ropa</option>
-                            <option value="Educacion">Educación</option>
+                            <option value="Educacion">Educacion</option>
                             <option value="Otros">Otros</option>
                         </select>
                     </div>
@@ -438,7 +453,7 @@
                 </div>
                 <div class="cuerpo-form">
                     <div class="grupo-form">
-                        <label class="etiqueta-form">Límite mensual</label>
+                        <label class="etiqueta-form">Limite mensual</label>
                         <input type="number" class="input-form" id="presupuestoMonto" placeholder="0.00" step="0.01" min="0">
                     </div>
                     <div class="grupo-form">
@@ -471,17 +486,6 @@
         <!-- seccion del menu inferior -->
         <div class="menu-inferior">
             <div class="seccion-izquierda">
-                <p
-                    style="
-                        display: flex;
-                        gap: 5px;
-                        align-items: center;
-                        justify-content: center;
-                    "
-                >
-                    <i data-lucide="refresh-cw" class="icono"></i> No
-                    sincronizado
-                </p>
                 <p
                     style="
                         display: flex;

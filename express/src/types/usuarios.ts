@@ -1,10 +1,7 @@
-// estas intefaces estan basadas en como tengo estructurada la base de datos
-// se puede ver en el archivo schemas.sql
+// Interfaz basada en la estructura de la tabla 'usuarios' de la base de datos
+// Las propiedades opcionales (?) permiten omitir campos que aun no se han definido
 
-// tener control sobre los datos que se ingresarar (que estaran permitidos )
-// uso de ? despues de la clave es para hacerlo opcional y no sea requerido si o si
-
-// para usuarios
+// Interfaz para la tabla de usuarios
 export interface Usuarios {
   id?: number;
   email?: string;

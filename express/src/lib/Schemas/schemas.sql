@@ -38,18 +38,6 @@ CREATE TABLE IF NOT EXISTS ingresos(
     FOREIGN KEY (idUsuario)     REFERENCES  usuarios    (id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS notas(
-    id                      INTEGER PRIMARY KEY AUTOINCREMENT,
-    idUsuario               INTEGER NOT NULL,
-    idReferencia            INTEGER NOT NULL,  -- id del gasto o ingreso
-    tipo                    TEXT NOT NULL CHECK(tipo IN ('gasto', 'ingreso')),
-    nota                    TEXT NOT NULL,     --  contenido de la nota
-    fechadeCreacion         DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fechadeActualizado      DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (idUsuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-    UNIQUE(idUsuario, idReferencia, tipo)      -- una nota por gasto/ingreso por usuario
-);
-
 CREATE TABLE IF NOT EXISTS presupuesto(
     id                      INTEGER PRIMARY KEY AUTOINCREMENT,
     idUsuario               INTEGER,

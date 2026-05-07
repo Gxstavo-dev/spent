@@ -1,3 +1,4 @@
+// referencias para la ventana de ajustes
 const ventanaAjustes = document.getElementById(
   "ventana_Ajustes",
 ) as HTMLDialogElement;
@@ -8,8 +9,10 @@ const btnEliminarDatos = document.getElementById(
   "btnEliminarDatos",
 ) as HTMLButtonElement;
 
+// cerramos la ventana
 btnCerrarAjustes.addEventListener("click", () => ventanaAjustes.close());
 
+// cuando le picamos a eliminar datos, manda peticion al backend
 btnEliminarDatos.addEventListener("click", async () => {
   const token = localStorage.getItem("token");
   if (!token) return;
@@ -23,8 +26,8 @@ btnEliminarDatos.addEventListener("click", async () => {
     });
 
     if (respuesta.ok) {
-      ventanaAjustes.close();
-      window.dispatchEvent(new CustomEvent("resumen-actualizado"));
+      ventanaAjustes.close(); // cerramos la ventana
+      window.dispatchEvent(new CustomEvent("resumen-actualizado")); // recargamos todo
     }
   } catch (error) {
     console.error("Error al eliminar datos:", error);

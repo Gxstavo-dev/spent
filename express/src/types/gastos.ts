@@ -1,11 +1,9 @@
-// estas intefaces estan basadas en como tengo estructurada la base de datos
-// se puede ver en el archivo schemas.sql
+// Las interfaces aqui definidas reflejan la estructura de las tablas en la base de datos
+// Consulte el archivo schemas.sql para mayor contexto sobre las columnas y tipos
 
-// tener control sobre los datos que se ingresarar (que estaran permitidos )
+// El signo de interrogacion (?) indica que la propiedad es opcional, no obligatoria
 
-// uso de ? despues de la clave es para hacerlo opcional y no sea requerido si o si
-
-// para gastos
+// Interfaz para la tabla de gastos
 export interface gastos {
   id?: number;
   monto?: number;

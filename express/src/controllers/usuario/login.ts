@@ -1,58 +1,63 @@
 import { conexion } from "../../lib/local/Database";
-import bcrypt from "bcryptjs"; // para encriptar las contrasñeas y no esten en texto plano
-import type { Usuarios } from "../../types/usuarios"; // el tipado de los datos de usuarios
-import type { Request, Response } from "express"; // para usar response y request
+import bcrypt from "bcryptjs";
+import type { Usuarios } from "../../types/usuarios";
+import type { Request, Response } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 
-// funcion para iniciar sesion
-export const login = async (req: Request, res: Response) => {
-  const { email, contrasena } = req.body; // obtener el contenido del formdata( input )
+// Importaciones:
+// conexion - conexion a la base de datos local SQLite
+// bcrypt - biblioteca para comparar contraseñas encriptadas
+// Usuarios - tipo TypeScript que define la estructura de un usuario
+// Request, Response - tipos de Express para manejar solicitudes y respuestas HTTP
+// jwt, JwtPayload - para crear y firmar tokens JWT
 
-  // verificamos si existe un usuario con esos datos
-  // solo email para comprobar si existe ese email
+// Controlador que inicia sesion y genera un token JWT (POST /usuarios/login)
+// Parametros del cuerpo: email (string), contrasena (string)
+// Retorna: 200 con el token JWT si las credenciales son validas, 401 si las credenciales son incorrectas
+export const login = async (req: Request, res: Response) => {
+  // Extraemos las credenciales del cuerpo de la solicitud
+  const { email, contrasena } = req.body;
+
+  // Funcion interna que busca un usuario por su correo electronico en la base de datos
   const obtenerUsuario = async (email: string) => {
-    // ejecutamos la sentencia sql y la limitamos a solo 1 coincidencia
     const consulta = await conexion.execute({
       sql: "SELECT * FROM usuarios WHERE email = ? LIMIT 1",
       args: [email],
     });
-
-    // almacenamos el resultado
-    return consulta.rows[0] as Usuarios; // lo tomamos como tipo usuarios y si no encuentra nada indefnido
+    return consulta.rows[0] as Usuarios;
   };
 
-  // para obtener todos los datos del usuario
+  // Buscamos el usuario en la base de datos
   const usuario = await obtenerUsuario(email);
 
+  // Verificamos si el usuario existe
   if (!usuario) {
-    // 401 -> credneciales invalidas
     return res.status(401).json({ error: "Credenciales incorrectas " });
   }
 
-  // si la contraseña es undefined retornamos error
+  // Verificamos si el usuario tiene una contraseña almacenada
   if (!usuario.contrasena) {
-    // 401 -> credneciales invalidas
     return res.status(401).json({ error: "Credenciales incorrectas" });
   }
 
-  // comparamos las contraseñas que ingresa el usuario a la que esta almacenada a la base de datos
+  // Comparamos la contraseña proporcionada con la almacenada (encriptada) en la base de datos
   const contrasenaValida = await bcrypt.compare(contrasena, usuario.contrasena);
 
-  // si no es igual enviar un error
+  // Si la contraseña no coincide, retornamos error de autenticacion
   if (!contrasenaValida) {
     return res.status(401).json({ error: "Contraseña incorrectas" });
   }
 
-  // crear token para enviar los datos de manera segura la usuario
+  // Creamos un token JWT con los datos del usuario, con una validez de 24 horas
   const token = jwt.sign(
     {
-      // dentro del token guardamos el id y email estos de codifican
       id: usuario.id,
       email: usuario.email,
     },
     process.env.JWT_SECRET!,
-    { expiresIn: "24h" }, // expira en 24 horas
+    { expiresIn: "24h" },
   );
-  // retornar el token
+
+  // Retornamos el token al cliente para que lo use en solicitudes posteriores
   return res.status(200).json({ token });
 };
