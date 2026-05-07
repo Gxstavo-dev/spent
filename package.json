@@ -1,5 +1,9 @@
 {
   "name": "spent",
+  "author": {
+    "url": "https://github.com/Gxstavo-dev",
+    "name": "Gxstavo-dev"
+  },
   "private": true,
   "version": "0.1.0",
   "type": "module",

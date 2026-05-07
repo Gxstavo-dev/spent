@@ -199,7 +199,6 @@
                     <li>Gastos e ingresos</li>
                     <li>Cada transaccion con titulo y descripcion</li>
                     <li>Categorias por color</li>
-                    <li>Agregar notas</li>
                 </ul>
 
                 <h3>Organizar</h3>
@@ -209,10 +208,9 @@
                 </p>
                 <ul>
                     <li>Ver balance total en tiempo real</li>
-                    <li>Buscar transacciones</li>
-                    <li>Filtrar por mes o categoria</li>
-                    <li>Marcar favoritos</li>
-                    <li>Exportar tus datos</li>
+                    <li>Filtrar por categoria</li>
+                    <li>Presupuesto mensual</li>
+                    <li>Editar y eliminar transacciones</li>
                 </ul>
 
                 <h2>Para desarrolladores</h2>
@@ -258,31 +256,63 @@
                         contrasena (hash), fechas
                     </li>
                     <li>
-                        <strong>categorias</strong> - id, categoria, color, tipo
-                        (gasto/ingreso), idUsuario
+                        <strong>gastos</strong> - id, monto, descripcion,
+                        categoria, fecha, idUsuario
                     </li>
                     <li>
-                        <strong>gastos</strong> - id, monto, descripcion, fecha,
-                        idUsuario, idCategoria
+                        <strong>ingresos</strong> - id, monto, descripcion,
+                        fecha, idUsuario
+                    </li>
+                    <li>
+                        <strong>presupuesto</strong> - id, monto, mes, anio,
+                        idUsuario
                     </li>
                 </ul>
 
                 <h3>API Endpoints</h3>
                 <ul>
                     <li>
-                        <strong>POST /usuarios/register</strong> - Crear cuenta
+                        <strong>POST /usuarios/registro</strong> - Crear cuenta
                     </li>
                     <li>
                         <strong>POST /usuarios/login</strong> - Iniciar sesion
                         (devuelve JWT)
                     </li>
                     <li>
-                        <strong>GET/POST/PUT/DELETE /categorias</strong> - CRUD
-                        categorias (JWT)
+                        <strong>GET /usuarios/verificar</strong> - Verificar token
                     </li>
                     <li>
-                        <strong>GET/POST/PUT/DELETE /gastos</strong> - CRUD
-                        gastos (JWT)
+                        <strong>GET /usuarios/mi-cuenta</strong> - Datos del usuario
+                    </li>
+                    <li>
+                        <strong>PUT /usuarios/cambiar-nombre</strong> - Cambiar nombre
+                    </li>
+                    <li>
+                        <strong>PUT /usuarios/cambiar-contrasena</strong> - Cambiar contrasena
+                    </li>
+                    <li>
+                        <strong>POST/GET /transacciones/ingreso</strong> - Crear y listar ingresos
+                    </li>
+                    <li>
+                        <strong>PUT/DELETE /transacciones/ingreso/:id</strong> - Editar y eliminar ingreso
+                    </li>
+                    <li>
+                        <strong>POST/GET /transacciones/gasto</strong> - Crear y listar gastos
+                    </li>
+                    <li>
+                        <strong>PUT/DELETE /transacciones/gasto/:id</strong> - Editar y eliminar gasto
+                    </li>
+                    <li>
+                        <strong>GET /transacciones/gastos/conteo</strong> - Conteo por categoria
+                    </li>
+                    <li>
+                        <strong>GET /transacciones/resumen</strong> - Resumen del mes
+                    </li>
+                    <li>
+                        <strong>POST /transacciones/presupuesto</strong> - Crear presupuesto
+                    </li>
+                    <li>
+                        <strong>DELETE /transacciones/datos</strong> - Eliminar todos los datos
                     </li>
                 </ul>
 
