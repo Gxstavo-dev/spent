@@ -404,9 +404,24 @@
                             <i data-lucide="mail" class="icono"></i>
                             <div class="contenido-info">
                                 <span class="etiqueta-info">Email</span>
-                                <p>ejemplo@gmail.com</p>
+                                <p id="cuentaEmail">ejemplo@gmail.com</p>
                             </div>
-                            <button class="boton-accion-info">Cambiar</button>
+                        </div>
+
+                        <div class="fila-info">
+                            <i data-lucide="user" class="icono"></i>
+                            <div class="contenido-info">
+                                <span class="etiqueta-info">Nombre</span>
+                                <p id="cuentaNombre">---</p>
+                            </div>
+                            <button class="boton-accion-info" id="btnCambiarNombre">Cambiar</button>
+                        </div>
+                        <div class="editar-inline" id="editarNombreDiv" style="display:none">
+                            <input type="text" class="input-form" id="inputNombre" placeholder="Nuevo nombre">
+                            <div class="botones-inline">
+                                <button class="boton-guardar-inline" id="btnGuardarNombre">Guardar</button>
+                                <button class="boton-cancelar-inline" id="btnCancelarNombre">Cancelar</button>
+                            </div>
                         </div>
 
                         <div class="fila-info">
@@ -420,10 +435,18 @@
 
                     <div class="seccion-seguridad">
                         <h4 class="etiqueta-estado">Seguridad</h4>
-                        <button class="boton-seguridad">
+                        <button class="boton-seguridad" id="btnCambiarContrasena">
                             <i data-lucide="key" class="icono"></i>
                             <span>Cambiar contraseña</span>
                         </button>
+                        <div class="editar-inline" id="editarContrasenaDiv" style="display:none">
+                            <input type="password" class="input-form" id="inputContrasenaActual" placeholder="Contraseña actual">
+                            <input type="password" class="input-form" id="inputContrasenaNueva" placeholder="Contraseña nueva">
+                            <div class="botones-inline">
+                                <button class="boton-guardar-inline" id="btnGuardarContrasena">Guardar</button>
+                                <button class="boton-cancelar-inline" id="btnCancelarContrasena">Cancelar</button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="seccion-cerrar-sesion">
