@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS gastos(
     -- manejo de datos double o float
     monto                       REAL NOT NULL,
     descripcion                 TEXT,
+    categoria                   TEXT,
     fecha                       DATE NOT NULL,
     fechadeCreacion             DATETIME DEFAULT CURRENT_TIMESTAMP,
     fechadeActualizado          DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -59,11 +60,4 @@ CREATE TABLE IF NOT EXISTS presupuesto(
     UNIQUE(idUsuario, mes, anio)
 );
 
-CREATE TABLE IF NOT EXISTS favoritos(
-    id                      INTEGER PRIMARY KEY AUTOINCREMENT,
-    idUsuario               INTEGER NOT NULL,
-    idReferencia            INTEGER NOT NULL,   -- el id del gasto o ingreso
-    tipo                    TEXT NOT NULL CHECK(tipo IN ('gasto', 'ingreso')), -- permitir solo esos dos valores
-    FOREIGN KEY (idUsuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-    UNIQUE(idUsuario, idReferencia, tipo)
-);
+

@@ -10,7 +10,6 @@ export const subBarralateral = document.getElementById(
 export const sidebar = document.getElementById("sidebar") as HTMLElement;
 
 // botones de para las diferentes secciones
-export const btnFavoritos = document.getElementById("favoritos") as HTMLElement;
 export const btnGastos = document.getElementById("Gastos") as HTMLElement;
 export const btnIngresos = document.getElementById("Ingresos") as HTMLElement;
 export const btnCategorias = document.getElementById(
@@ -34,6 +33,5 @@ export const btnOtros = document.getElementById("Otros") as HTMLElement;
 // botones para abrir su ventana flotante
 export const btnAjustes = document.getElementById("Ajustes") as HTMLElement;
 export const btnCuenta = document.getElementById("Cuenta") as HTMLElement;
-export const btnNube = document.getElementById("Nube") as HTMLElement;
 
 

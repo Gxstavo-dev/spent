@@ -20,12 +20,7 @@ export const eliminarDatos = async (req: Request, res: Response) => {
 
   // intentamos eliminar todos los datos del usuario
   try {
-    // primero eliminamos los favoritos del usuario
-    await conexion.execute({
-      sql: "DELETE FROM favoritos WHERE idUsuario = ?",
-      args: [idUsuario],
-    });
-    // luego eliminamos las notas del usuario
+    // primero eliminamos las notas del usuario
     await conexion.execute({
       sql: "DELETE FROM notas WHERE idUsuario = ?",
       args: [idUsuario],

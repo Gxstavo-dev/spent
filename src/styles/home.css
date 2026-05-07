@@ -433,15 +433,122 @@ body {
     height: 100%;
     opacity: 0;
     border-right: 1px solid var(--border);
-    background-color: white;
+    background-color: var(--background);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .subBarralateral.mostrarBarra {
-    width: 250px;
-    height: 100%;
     opacity: 1;
-    background-color: red;
+    pointer-events: auto;
+}
+
+.contenido-subbarra {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.encabezado-subbarra {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.titulo-subbarra {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lista-subbarra {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.elemento-subbarra {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+}
+
+.elemento-subbarra:hover {
+    background: var(--muted);
+}
+
+.elemento-subbarra .insignia {
+    margin-left: auto;
+}
+
+.item-gasto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 6px;
+    gap: 8px;
+}
+
+.item-gasto:hover {
+    background: var(--muted);
+}
+
+.info-gasto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.cat-gasto {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted-foreground);
+}
+
+.desc-gasto {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fecha-gasto {
+    font-size: 10px;
+    color: var(--muted-foreground);
+}
+
+.monto-gasto {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--red-500);
+    flex-shrink: 0;
+}
+
+.vacio-lista {
+    padding: 24px 8px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted-foreground);
 }
 
 dialog {
@@ -455,9 +562,7 @@ dialog::backdrop {
 }
 
 #ventana_Ajustes,
-#ventana_Cuenta,
-#ventana_MigrarDatabase,
-#ventana_Feedback {
+#ventana_Cuenta {
     width: 400px;
     height: 600px;
     border-radius: 21px;
@@ -468,250 +573,6 @@ dialog::backdrop {
 dialog .ventana {
     width: 100%;
     height: 100%;
-}
-
-/*  Migrar Database   */
-
-.ventana-migrar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background: var(--background);
-    border-radius: 21px;
-    overflow: hidden;
-}
-
-/* Header */
-.encabezado-migrar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-}
-
-.titulo-encabezado-migrar {
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.boton-cerrar-migrar {
-    padding: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted-foreground);
-}
-
-.boton-cerrar-migrar:hover {
-    background: var(--muted);
-}
-
-/* Body */
-.cuerpo-migrar {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
-}
-
-.descripcion-migrar {
-    font-size: 14px;
-    color: var(--muted-foreground);
-    margin-bottom: 16px;
-    line-height: 1.5;
-}
-
-/* Options */
-.opciones-migrar {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.opcion-migrar {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: none;
-    cursor: pointer;
-    text-align: left;
-    transition:
-        background 0.15s,
-        border-color 0.15s;
-    font-family: inherit;
-}
-
-.opcion-migrar:hover {
-    background: color-mix(in srgb, var(--muted) 50%, transparent);
-}
-
-.opcion-migrar.activo {
-    border-color: var(--blue-500);
-    background: #eff6ff;
-}
-
-/* Icon container */
-.icono-opcion {
-    padding: 8px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.icono-opcion .icono-lg {
-    width: 20px;
-    height: 20px;
-}
-
-.icono-opcion-verde {
-    background: #dcfce7;
-    color: #16a34a;
-}
-
-.icono-opcion-azul {
-    background: #dbeafe;
-    color: #2563eb;
-}
-
-.icono-opcion-purpura {
-    background: #f3e8ff;
-    color: #9333ea;
-}
-
-/* Option text */
-.texto-opcion {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.titulo-opcion {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--foreground);
-}
-
-.subtitulo-opcion {
-    font-size: 12px;
-    color: var(--muted-foreground);
-    line-height: 1.4;
-}
-
-/* Status section */
-.estado-migrar {
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-    margin-bottom: 16px;
-}
-
-.etiqueta-estado {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted-foreground);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
-}
-
-.fila-estado {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    padding: 4px 0;
-}
-
-.fila-estado + .fila-estado {
-    margin-top: 8px;
-}
-
-.grupo-estado {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.texto-confirmacion {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: #16a34a;
-    font-size: 13px;
-}
-
-.icono-sm {
-    width: 14px;
-    height: 14px;
-}
-
-.etiqueta-estado + .fila-estado {
-    margin-top: 0;
-}
-
-/* Footer */
-.pie-migrar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-}
-
-.boton-secundario-migrar {
-    padding: 6px 12px;
-    font-size: 14px;
-    color: var(--muted-foreground);
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    font-family: inherit;
-    transition: background 0.15s;
-}
-
-.boton-secundario-migrar:hover {
-    background: var(--muted);
-}
-
-.boton-primario-migrar {
-    padding: 6px 16px;
-    font-size: 14px;
-    color: white;
-    background: var(--blue-500);
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    font-family: inherit;
-    transition: background 0.15s;
-}
-
-.boton-primario-migrar:hover {
-    background: #2563eb;
-}
-
-.boton-primario-migrar:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Override dialog background for migrate modal */
-#ventana_MigrarDatabase {
-    background: var(--background);
 }
 
 /*  Cuenta Modal  */

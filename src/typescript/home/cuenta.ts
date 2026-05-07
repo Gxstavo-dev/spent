@@ -11,6 +11,7 @@ const btnCerrarSesionCuenta = document.getElementById(
 ) as HTMLButtonElement;
 const cuentaEmail = document.getElementById("cuentaEmail") as HTMLParagraphElement;
 const cuentaNombre = document.getElementById("cuentaNombre") as HTMLParagraphElement;
+const barraCuentaEmail = document.getElementById("barraCuentaEmail") as HTMLSpanElement;
 const btnCambiarNombre = document.getElementById(
   "btnCambiarNombre",
 ) as HTMLButtonElement;
@@ -66,6 +67,7 @@ async function cargarDatosCuenta() {
       const datos = await respuesta.json();
       cuentaEmail.textContent = datos.email;
       cuentaNombre.textContent = datos.nombre;
+      barraCuentaEmail.textContent = `Cuenta:${datos.email}`;
     }
   } catch (error) {
     console.error("Error al cargar datos de la cuenta:", error);

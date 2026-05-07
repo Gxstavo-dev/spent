@@ -7,8 +7,8 @@ import { obtenerUsuarioDeToken } from "../../lib/auth";
 
 // esta funcion se ejecuta cuando alguien hace un POST a /transacciones/gasto
 export const crearGasto = async (req: Request, res: Response) => {
-  // del cuerpo de la peticion sacamos el monto, la descripcion y la fecha
-  const { monto, descripcion, fecha } = req.body;
+  // del cuerpo de la peticion sacamos el monto, la descripcion, la categoria y la fecha
+  const { monto, descripcion, categoria, fecha } = req.body;
   // obtenemos el usuario actual desde el token que envio en el header
   const usuario = obtenerUsuarioDeToken(req);
 
@@ -29,9 +29,9 @@ export const crearGasto = async (req: Request, res: Response) => {
   try {
     // ejecutamos la consulta SQL para insertar un nuevo gasto
     const consulta = await conexion.execute({
-      sql: "INSERT INTO gastos(monto, descripcion, fecha, idUsuario) VALUES(?,?,?,?)",
+      sql: "INSERT INTO gastos(monto, descripcion, categoria, fecha, idUsuario) VALUES(?,?,?,?,?)",
       // usamos ? para evitar inyeccion SQL, los valores van en args
-      args: [monto, descripcion || null, fecha, idUsuario],
+      args: [monto, descripcion || null, categoria || null, fecha, idUsuario],
     });
 
     // si se inserto correctamente (rowsAffected == 1) devolvemos el id creado

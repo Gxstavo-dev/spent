@@ -51,57 +51,10 @@
                     </div>
                 </div>
 
-                <!-- seccion favoritos -->
-                <div class="seccion-barra">
-                    <button
-                        id="favoritos"
-                        class="alternar-seccion herramienta"
-                        data-tooltip="Acceso rápido a elementos favoritos"
-                    >
-                        <div
-                            class="flexible elementos-centro espacio-1-5 texto-xs"
-                        >
-                            <i data-lucide="star" class="icono icono-ambar"></i>
-                            <span>Favoritos</span>
-                        </div>
-                    </button>
-                    <div class="subseccion" id="favorites-content">
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Ver todos los gastos"
-                            id="Gastos"
-                        >
-                            <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="chevron-right"
-                                    class="icono icono-sm"
-                                ></i>
-                                <span>Gastos</span>
-                            </div>
-                            <span class="insignia">0</span>
-                        </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Ver todos los ingresos"
-                            id="Ingresos"
-                        >
-                            <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="chevron-right"
-                                    class="icono icono-sm"
-                                ></i>
-                                <span>Ingresos</span>
-                            </div>
-                            <span class="insignia">0</span>
-                        </button>
-                    </div>
-                </div>
-
                 <!-- seccion categorias  -->
                 <div class="seccion-barra flex-1 desbordamiento-auto">
                     <button
-                        class="alternar-seccion herramienta"
-                        data-tooltip="Filtrar por categoría de gasto"
+                        class="alternar-seccion"
                         id="Categorias"
                     >
                         <div
@@ -111,149 +64,79 @@
                             <span>Categorías</span>
                         </div>
                         <div class="flexible elementos-centro espacio-1">
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-total">0</span>
                         </div>
                     </button>
                     <div class="subseccion" id="categories-content">
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Gastos personales"
-                            id="Personal"
-                        >
+                        <button class="elemento-categoria" id="Personal">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="user"
-                                    class="icono icono-azul"
-                                ></i>
+                                <i data-lucide="user" class="icono icono-azul"></i>
                                 <span>Personal</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Personal">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Alimentación y restaurantes"
-                            id="Comida"
-                        >
+                        <button class="elemento-categoria" id="Comida">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="utensils"
-                                    class="icono icono-rojo-claro"
-                                ></i>
+                                <i data-lucide="utensils" class="icono icono-rojo-claro"></i>
                                 <span>Comida</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Comida">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Gasolina, transporte público"
-                            id="Transporte"
-                        >
+                        <button class="elemento-categoria" id="Transporte">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="car"
-                                    class="icono icono-azul-claro"
-                                ></i>
+                                <i data-lucide="car" class="icono icono-azul-claro"></i>
                                 <span>Transporte</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Transporte">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Ingresos y gastos laborales"
-                            id="Trabajo"
-                        >
+                        <button class="elemento-categoria" id="Trabajo">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="briefcase"
-                                    class="icono icono-ambar"
-                                ></i>
+                                <i data-lucide="briefcase" class="icono icono-ambar"></i>
                                 <span>Trabajo</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Trabajo">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Médicos, medicinas, gym"
-                            id="Salud"
-                        >
+                        <button class="elemento-categoria" id="Salud">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="heart"
-                                    class="icono icono-verde-azulado"
-                                ></i>
+                                <i data-lucide="heart" class="icono icono-verde-azulado"></i>
                                 <span>Salud</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Salud">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Streaming, cine, diversión"
-                            id="Entretenimiento"
-                        >
+                        <button class="elemento-categoria" id="Entretenimiento">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="film"
-                                    class="icono icono-verde"
-                                ></i>
+                                <i data-lucide="film" class="icono icono-verde"></i>
                                 <span>Entretenimiento</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Entretenimiento">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Renta, servicios, hogar"
-                            id="Hogar"
-                        >
+                        <button class="elemento-categoria" id="Hogar">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="home"
-                                    class="icono icono-ambar-claro"
-                                ></i>
+                                <i data-lucide="home" class="icono icono-ambar-claro"></i>
                                 <span>Hogar</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Hogar">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Vestimenta y accesorios"
-                            id="Ropa"
-                        >
+                        <button class="elemento-categoria" id="Ropa">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="shirt"
-                                    class="icono icono-gris"
-                                ></i>
+                                <i data-lucide="shirt" class="icono icono-gris"></i>
                                 <span>Ropa</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Ropa">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Cursos, libros, educación"
-                            id="Educacion"
-                        >
+                        <button class="elemento-categoria" id="Educacion">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="graduation-cap"
-                                    class="icono icono-rojo-oscuro"
-                                ></i>
+                                <i data-lucide="graduation-cap" class="icono icono-rojo-oscuro"></i>
                                 <span>Educacion</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Educacion">0</span>
                         </button>
-                        <button
-                            class="elemento-categoria"
-                            data-tooltip="Gastos sin categoría"
-                            id="Otros"
-                        >
+                        <button class="elemento-categoria" id="Otros">
                             <div class="flexible elementos-centro espacio-2">
-                                <i
-                                    data-lucide="circle-dot"
-                                    class="icono icono-gris-oscuro"
-                                ></i>
+                                <i data-lucide="circle-dot" class="icono icono-gris-oscuro"></i>
                                 <span>Otros</span>
                             </div>
-                            <span class="insignia">0</span>
+                            <span class="insignia" id="conteo-Otros">0</span>
                         </button>
                     </div>
                 </div>
@@ -311,14 +194,6 @@
                         <i data-lucide="user" class="icono"></i>
                         <span>Cuenta</span>
                     </button>
-                    <button
-                        class="boton-barra herramienta"
-                        data-tooltip="Importar, exportar o sincronizar datos"
-                        id="Nube"
-                    >
-                        <i data-lucide="database" class="icono"></i>
-                        <span>Migrar Database</span>
-                    </button>
                 </div>
 
                 <!-- seccion Footer  -->
@@ -340,7 +215,17 @@
             </aside>
 
             <!-- subBarra-lateral -->
-            <div class="subBarralateral" id="subBarralateral"></div>
+            <div class="subBarralateral" id="subBarralateral">
+                <div class="contenido-subbarra" id="subbarra-categorias" style="display:none">
+                    <div class="encabezado-subbarra">
+                        <span class="titulo-subbarra">
+                            <i data-lucide="layout-grid" class="icono"></i>
+                            Categorías
+                        </span>
+                    </div>
+                    <div class="lista-subbarra" id="lista-gastos-categoria"></div>
+                </div>
+            </div>
             <!-- Submenu-lateral -->
 
             <div class="caja-principal"></div>
@@ -461,87 +346,6 @@
                 </div>
             </div>
         </dialog>
-        <dialog id="ventana_MigrarDatabase">
-            <div class="ventana-migrar">
-                <div class="encabezado-migrar">
-                    <span class="titulo-encabezado-migrar">
-                        <i data-lucide="database" class="icono"></i>
-                        Migrar Database
-                    </span>
-                    <button class="boton-cerrar-migrar" id="btnCerrarMigrar">
-                        <i data-lucide="x" class="icono"></i>
-                    </button>
-                </div>
-
-                <div class="cuerpo-migrar">
-                    <p class="descripcion-migrar">
-                        Mantén tus datos sincronizados en todos tus dispositivos.
-                    </p>
-
-                    <div class="opciones-migrar">
-                        <button class="opcion-migrar" data-opcion="sync">
-                            <div class="icono-opcion icono-opcion-purpura">
-                                <i
-                                    data-lucide="refresh-cw"
-                                    class="icono-lg"
-                                ></i>
-                            </div>
-                            <div class="texto-opcion">
-                                <span class="titulo-opcion"
-                                    >Sincronizar con la nube</span
-                                >
-                                <span class="subtitulo-opcion"
-                                    >Mantén tus datos sincronizados en todos tus
-                                    dispositivos</span
-                                >
-                            </div>
-                        </button>
-                    </div>
-
-                    <div class="estado-migrar">
-                        <h4 class="etiqueta-estado">Estado actual</h4>
-                        <div class="fila-estado">
-                            <div class="grupo-estado">
-                                <i data-lucide="hard-drive" class="icono"></i>
-                                <span>Datos locales</span>
-                            </div>
-                            <span class="texto-confirmacion">
-                                <i
-                                    data-lucide="check-circle-2"
-                                    class="icono-sm"
-                                ></i>
-                                Guardados
-                            </span>
-                        </div>
-                        <div class="fila-estado">
-                            <div class="grupo-estado">
-                                <i data-lucide="cloud" class="icono"></i>
-                                <span>Sincronización nube</span>
-                            </div>
-                            <span class="texto-silenciado">No configurado</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="pie-migrar">
-                    <button
-                        class="boton-secundario-migrar"
-                        id="btnCancelarMigrar"
-                    >
-                        Cancelar
-                    </button>
-                    <button
-                        class="boton-primario-migrar"
-                        id="btnContinuarMigrar"
-                        disabled
-                    >
-                        Continuar
-                    </button>
-                </div>
-            </div>
-        </dialog>
-
         <dialog id="ventana_Ingreso">
             <div>
                 <div class="encabezado-form">
@@ -687,7 +491,7 @@
                     "
                 >
                     <i data-lucide="user" class="icono"></i>
-                    Cuenta:Ejemplo@gmail.com
+                    <span id="barraCuentaEmail">Cuenta:Ejemplo@gmail.com</span>
                 </p>
             </div>
         </div>
