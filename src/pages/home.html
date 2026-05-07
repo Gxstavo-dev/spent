@@ -27,35 +27,26 @@
                 <div class="seccion-barra">
                     <span class="etiqueta-seccion">Resumen</span>
                     <div class="espaciado-y-1">
-                        <div
-                            class="herramienta flex-entre texto-xs"
-                            data-tooltip="Total de gastos del mes actual"
-                        >
+                        <div class="flex-entre texto-xs">
                             <div class="flexible elementos-centro espacio-2">
                                 <i data-lucide="credit-card" class="icono"></i>
                                 <span>Gastos</span>
                             </div>
-                            <span class="texto-rojo">$0</span>
+                            <span class="texto-rojo" id="resumenGastos">$0</span>
                         </div>
-                        <div
-                            class="herramienta flex-entre texto-xs"
-                            data-tooltip="Presupuesto mensual configurado"
-                        >
+                        <div class="flex-entre texto-xs">
                             <div class="flexible elementos-centro espacio-2">
                                 <i data-lucide="wallet" class="icono"></i>
                                 <span>Presupuesto</span>
                             </div>
-                            <span class="texto-silenciado">$0</span>
+                            <span class="texto-silenciado" id="resumenPresupuesto">$0</span>
                         </div>
-                        <div
-                            class="herramienta flex-entre texto-xs"
-                            data-tooltip="Balance total del mes (ingresos - gastos)"
-                        >
+                        <div class="flex-entre texto-xs">
                             <div class="flexible elementos-centro espacio-2">
                                 <i data-lucide="dollar-sign" class="icono"></i>
                                 <span>Total de mes</span>
                             </div>
-                            <span class="texto-silenciado">$0</span>
+                            <span class="texto-silenciado" id="resumenBalance">$0</span>
                         </div>
                     </div>
                 </div>
@@ -267,6 +258,41 @@
                     </div>
                 </div>
 
+                <!-- seccion acciones -->
+                <div class="seccion-barra">
+                    <span class="etiqueta-seccion">Acciones</span>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Registrar un nuevo ingreso"
+                        id="btnIngreso"
+                    >
+                        <i
+                            data-lucide="trending-up"
+                            class="icono icono-verde"
+                        ></i>
+                        <span>Crear ingreso</span>
+                    </button>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Registrar un nuevo gasto"
+                        id="btnGasto"
+                    >
+                        <i
+                            data-lucide="trending-down"
+                            class="icono icono-rojo-claro"
+                        ></i>
+                        <span>Crear gasto</span>
+                    </button>
+                    <button
+                        class="boton-barra herramienta"
+                        data-tooltip="Definir presupuesto mensual"
+                        id="btnPresupuesto"
+                    >
+                        <i data-lucide="wallet" class="icono icono-azul"></i>
+                        <span>Definir presupuesto</span>
+                    </button>
+                </div>
+
                 <!-- seccion de opciones  -->
                 <div class="seccion-barra">
                     <button
@@ -299,35 +325,11 @@
                 <div class="pie-barra">
                     <button
                         class="boton-barra herramienta"
-                        data-tooltip="Información sobre la aplicación"
-                        id="SobreSpent"
-                    >
-                        <i data-lucide="info" class="icono"></i>
-                        <span>Sobre spent</span>
-                    </button>
-                    <button
-                        class="boton-barra herramienta"
-                        data-tooltip="Aprende a usar Spent"
-                        id="Guia"
-                    >
-                        <i data-lucide="book" class="icono"></i>
-                        <span>Guia de uso</span>
-                    </button>
-                    <button
-                        class="boton-barra herramienta"
                         data-tooltip="Cerrar sesión"
                         id="logout"
                     >
                         <i data-lucide="log-out" class="icono"></i>
                         <span>Cerrar sesión</span>
-                    </button>
-                    <button
-                        class="boton-barra herramienta"
-                        data-tooltip="Enviar comentarios o reportar problemas"
-                        id="Feedback"
-                    >
-                        <i data-lucide="message-square" class="icono"></i>
-                        <span>FeedBack</span>
                     </button>
                     <span
                         class="herramienta texto-[10px]"
@@ -346,16 +348,295 @@
 
         <!-- ventanas flotantes -->
         <dialog id="ventana_Ajustes">
-            <div class="ventana"><div>
+            <div class="ventana-ajustes">
+                <div class="encabezado-ajustes">
+                    <span class="titulo-encabezado-ajustes">Ajustes</span>
+                    <button class="boton-cerrar-ajustes" id="btnCerrarAjustes">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+
+                <div class="cuerpo-ajustes">
+                    <section class="seccion-ajustes">
+                        <h3 class="titulo-seccion-ajustes">
+                            <i data-lucide="globe" class="icono"></i>
+                            Regional
+                        </h3>
+                        <div class="fila-ajuste">
+                            <span class="texto-sm">Moneda</span>
+                            <span class="texto-xs texto-silenciado">MXN (Peso Mexicano) — solo disponible por el momento</span>
+                        </div>
+                    </section>
+
+                    <section class="seccion-ajustes">
+                        <h3 class="titulo-seccion-ajustes">
+                            <i data-lucide="shield" class="icono"></i>
+                            Datos
+                        </h3>
+                        <div class="grupo-botones-ajustes">
+                            <button class="boton-peligro" id="btnEliminarDatos">
+                                <i data-lucide="trash-2" class="icono"></i>
+                                Eliminar todos los datos
+                            </button>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="pie-ajustes">
+                    <span class="texto-xs texto-silenciado"
+                        >Los cambios se guardan automáticamente</span
+                    >
+                </div>
+            </div>
         </dialog>
         <dialog id="ventana_Cuenta">
-            <div class="ventana"><div>
+            <div class="ventana-cuenta">
+                <div class="encabezado-cuenta">
+                    <span class="titulo-encabezado-cuenta">Mi Cuenta</span>
+                    <button class="boton-cerrar-cuenta" id="btnCerrarCuenta">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+
+                <div class="cuerpo-cuenta">
+                    <div class="info-cuenta">
+                        <div class="fila-info">
+                            <i data-lucide="mail" class="icono"></i>
+                            <div class="contenido-info">
+                                <span class="etiqueta-info">Email</span>
+                                <p>ejemplo@gmail.com</p>
+                            </div>
+                            <button class="boton-accion-info">Cambiar</button>
+                        </div>
+
+                        <div class="fila-info">
+                            <i data-lucide="calendar" class="icono"></i>
+                            <div class="contenido-info">
+                                <span class="etiqueta-info">Miembro desde</span>
+                                <p>Abril 2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="seccion-seguridad">
+                        <h4 class="etiqueta-estado">Seguridad</h4>
+                        <button class="boton-seguridad">
+                            <i data-lucide="key" class="icono"></i>
+                            <span>Cambiar contraseña</span>
+                        </button>
+                    </div>
+
+                    <div class="seccion-cerrar-sesion">
+                        <button
+                            class="boton-cerrar-sesion"
+                            id="btnCerrarSesionCuenta"
+                        >
+                            <i data-lucide="log-out" class="icono"></i>
+                            <span>Cerrar sesión</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </dialog>
         <dialog id="ventana_MigrarDatabase">
-            <div class="ventana"><div>
+            <div class="ventana-migrar">
+                <div class="encabezado-migrar">
+                    <span class="titulo-encabezado-migrar">
+                        <i data-lucide="database" class="icono"></i>
+                        Migrar Database
+                    </span>
+                    <button class="boton-cerrar-migrar" id="btnCerrarMigrar">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+
+                <div class="cuerpo-migrar">
+                    <p class="descripcion-migrar">
+                        Mantén tus datos sincronizados en todos tus dispositivos.
+                    </p>
+
+                    <div class="opciones-migrar">
+                        <button class="opcion-migrar" data-opcion="sync">
+                            <div class="icono-opcion icono-opcion-purpura">
+                                <i
+                                    data-lucide="refresh-cw"
+                                    class="icono-lg"
+                                ></i>
+                            </div>
+                            <div class="texto-opcion">
+                                <span class="titulo-opcion"
+                                    >Sincronizar con la nube</span
+                                >
+                                <span class="subtitulo-opcion"
+                                    >Mantén tus datos sincronizados en todos tus
+                                    dispositivos</span
+                                >
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="estado-migrar">
+                        <h4 class="etiqueta-estado">Estado actual</h4>
+                        <div class="fila-estado">
+                            <div class="grupo-estado">
+                                <i data-lucide="hard-drive" class="icono"></i>
+                                <span>Datos locales</span>
+                            </div>
+                            <span class="texto-confirmacion">
+                                <i
+                                    data-lucide="check-circle-2"
+                                    class="icono-sm"
+                                ></i>
+                                Guardados
+                            </span>
+                        </div>
+                        <div class="fila-estado">
+                            <div class="grupo-estado">
+                                <i data-lucide="cloud" class="icono"></i>
+                                <span>Sincronización nube</span>
+                            </div>
+                            <span class="texto-silenciado">No configurado</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pie-migrar">
+                    <button
+                        class="boton-secundario-migrar"
+                        id="btnCancelarMigrar"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        class="boton-primario-migrar"
+                        id="btnContinuarMigrar"
+                        disabled
+                    >
+                        Continuar
+                    </button>
+                </div>
+            </div>
         </dialog>
-        <dialog id="ventana_Feedback">
-            <div class="ventana"><div>
+
+        <dialog id="ventana_Ingreso">
+            <div>
+                <div class="encabezado-form">
+                    <span class="titulo-encabezado-form">
+                        <i data-lucide="trending-up" class="icono icono-verde"></i>
+                        Nuevo ingreso
+                    </span>
+                    <button class="boton-cerrar-form" id="btnCerrarIngreso">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+                <div class="cuerpo-form">
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Cantidad</label>
+                        <input type="number" class="input-form" id="ingresoMonto" placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Descripción</label>
+                        <input type="text" class="input-form" id="ingresoDescripcion" placeholder="Ej: Salario mensual">
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Fecha</label>
+                        <input type="date" class="input-form" id="ingresoFecha">
+                    </div>
+                    <button class="boton-enviar-form" id="btnGuardarIngreso">
+                        <i data-lucide="check" class="icono-sm"></i>
+                        Guardar ingreso
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="ventana_Gasto">
+            <div>
+                <div class="encabezado-form">
+                    <span class="titulo-encabezado-form">
+                        <i data-lucide="trending-down" class="icono icono-rojo-claro"></i>
+                        Nuevo gasto
+                    </span>
+                    <button class="boton-cerrar-form" id="btnCerrarGasto">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+                <div class="cuerpo-form">
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Cantidad</label>
+                        <input type="number" class="input-form" id="gastoMonto" placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Descripción</label>
+                        <input type="text" class="input-form" id="gastoDescripcion" placeholder="Ej: Comida del mes">
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Categoría</label>
+                        <select class="select-form" id="gastoCategoria">
+                            <option value="Personal">Personal</option>
+                            <option value="Comida">Comida</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Trabajo">Trabajo</option>
+                            <option value="Salud">Salud</option>
+                            <option value="Entretenimiento">Entretenimiento</option>
+                            <option value="Hogar">Hogar</option>
+                            <option value="Ropa">Ropa</option>
+                            <option value="Educacion">Educación</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Fecha</label>
+                        <input type="date" class="input-form" id="gastoFecha">
+                    </div>
+                    <button class="boton-enviar-form" id="btnGuardarGasto">
+                        <i data-lucide="check" class="icono-sm"></i>
+                        Guardar gasto
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="ventana_Presupuesto">
+            <div>
+                <div class="encabezado-form">
+                    <span class="titulo-encabezado-form">
+                        <i data-lucide="wallet" class="icono icono-azul"></i>
+                        Presupuesto mensual
+                    </span>
+                    <button class="boton-cerrar-form" id="btnCerrarPresupuesto">
+                        <i data-lucide="x" class="icono"></i>
+                    </button>
+                </div>
+                <div class="cuerpo-form">
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Límite mensual</label>
+                        <input type="number" class="input-form" id="presupuestoMonto" placeholder="0.00" step="0.01" min="0">
+                    </div>
+                    <div class="grupo-form">
+                        <label class="etiqueta-form">Mes</label>
+                        <select class="select-form" id="presupuestoMes">
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio">Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
+                            <option value="Diciembre">Diciembre</option>
+                        </select>
+                    </div>
+                    <button class="boton-enviar-form" id="btnGuardarPresupuesto">
+                        <i data-lucide="check" class="icono-sm"></i>
+                        Guardar presupuesto
+                    </button>
+                </div>
+            </div>
         </dialog>
 
         <!-- ventanas flotantes -->
@@ -385,48 +666,6 @@
                     <i data-lucide="user" class="icono"></i>
                     Cuenta:Ejemplo@gmail.com
                 </p>
-            </div>
-            <div class="seccion-medio">
-                <p
-                    style="
-                        display: flex;
-                        gap: 5px;
-                        align-items: center;
-                        justify-content: center;
-                    "
-                >
-                    <i data-lucide="credit-card" class="icono"></i> Gastos:0
-                </p>
-                <p
-                    style="
-                        display: flex;
-                        gap: 5px;
-                        align-items: center;
-                        justify-content: center;
-                    "
-                >
-                    <i data-lucide="layout-grid" class="icono"></i>
-                    Categorias:0
-                </p>
-                <p style="display: flex; gap: 5px">
-                    <i data-lucide="dollar-sign" class="icono"></i> Total del
-                    mes: $0.00
-                </p>
-            </div>
-            <div class="seccion-derecha">
-                <p>Vista:--/--</p>
-                <p>Presupuesto restante:$0</p>
-                <button
-                    class="feedback-menu-inferior"
-                    style="
-                        display: flex;
-                        gap: 5px;
-                        align-items: center;
-                        justify-content: center;
-                    "
-                >
-                    <i data-lucide="message-square" class="icono"></i> Feedback
-                </button>
             </div>
         </div>
 

@@ -4,7 +4,6 @@ import {
   btnAjustes,
   btnCuenta,
   btnNube,
-  Feedback,
 } from "./elementos";
 
 // nos servira para guardar el boton que esta activo en ese momento,
@@ -19,16 +18,16 @@ botones.forEach((boton) => {
   // cada boton tiene su evento
   boton.addEventListener("click", () => {
     // como estamos recorriendo todos los botones que estan en el sidebar tambien se contaran los que no aplicara para abrir la subBarralateral
-    // entcs el switch nos ayudara comparando cada id de ese boton y si tiene Ajustes,Cuenta,Nube,Guia,Feedback,logout,SobreSpent haremos que no los almacene y que se detenga la ejeccion del
+    // entcs el switch nos ayudara comparando cada id de ese boton y si tiene Ajustes,Cuenta,Nube,logout haremos que no los almacene y que se detenga la ejeccion del
     // evento para que no abra la subBarralateral
     switch (boton.id) {
+      case "btnIngreso":
+      case "btnGasto":
+      case "btnPresupuesto":
       case "Ajustes":
       case "Cuenta":
       case "Nube":
-      case "Guia":
-      case "Feedback":
       case "logout":
-      case "SobreSpent":
         botonActivo = null;
         return;
 
@@ -47,10 +46,16 @@ botones.forEach((boton) => {
   });
 });
 
+const btnIngreso = document.getElementById("btnIngreso") as HTMLElement;
+const btnGasto = document.getElementById("btnGasto") as HTMLElement;
+const btnPresupuesto = document.getElementById("btnPresupuesto") as HTMLElement;
+
 btnAjustes.addEventListener("click", () => abrirModal("ventana_Ajustes"));
 btnCuenta.addEventListener("click", () => abrirModal("ventana_Cuenta"));
 btnNube.addEventListener("click", () => abrirModal("ventana_MigrarDatabase"));
-Feedback.addEventListener("click", () => abrirModal("ventana_Feedback"));
+btnIngreso.addEventListener("click", () => abrirModal("ventana_Ingreso"));
+btnGasto.addEventListener("click", () => abrirModal("ventana_Gasto"));
+btnPresupuesto.addEventListener("click", () => abrirModal("ventana_Presupuesto"));
 
 function abrirModal(modal: string) {
   // verificamos si existe

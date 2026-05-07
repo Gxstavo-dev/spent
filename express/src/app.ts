@@ -2,6 +2,7 @@
 import cors from "cors";
 import express from "express";
 import { rutaUsuarios } from "./routes/rutaUsuarios";
+import { rutaTransacciones } from "./routes/rutaTransacciones";
 
 const app = express(); // iniciarlizar express y almacenarlo en app
 
@@ -13,5 +14,6 @@ const app = express(); // iniciarlizar express y almacenarlo en app
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:1420", credentials: true })); // para que acepte los datos que vienen de otro puerto
 app.use("/usuarios", rutaUsuarios);
+app.use("/transacciones", rutaTransacciones);
 
 export default app;

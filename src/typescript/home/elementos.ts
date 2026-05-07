@@ -35,8 +35,5 @@ export const btnOtros = document.getElementById("Otros") as HTMLElement;
 export const btnAjustes = document.getElementById("Ajustes") as HTMLElement;
 export const btnCuenta = document.getElementById("Cuenta") as HTMLElement;
 export const btnNube = document.getElementById("Nube") as HTMLElement;
-export const btnGuia = document.getElementById("Guia") as HTMLElement;
-export const btnSobreSpent = document.getElementById(
-  "SobreSpent",
-) as HTMLElement;
-export const Feedback = document.getElementById("Feedback") as HTMLElement;
+
+

@@ -14,5 +14,4 @@ export interface gastos {
   fechadeCreacion?: string;
   fechadeActualizado?: string;
   idUsuario?: number;
-  idCateogoria?: number;
 }
