@@ -40,17 +40,3 @@ export const btnSobreSpent = document.getElementById(
   "SobreSpent",
 ) as HTMLElement;
 export const Feedback = document.getElementById("Feedback") as HTMLElement;
-
-// las ventanas flotantes de acciones
-export const ventanaAjustes = document.getElementById(
-  "ventana_Ajustes",
-) as HTMLElement;
-export const ventanaCuenta = document.getElementById(
-  "ventana_Cuenta",
-) as HTMLElement;
-export const ventanaNube = document.getElementById(
-  "ventana_MigrarDatabase",
-) as HTMLElement;
-export const ventanaFeedback = document.getElementById(
-  "ventana_Feedback",
-) as HTMLElement;

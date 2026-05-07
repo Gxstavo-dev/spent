@@ -5,10 +5,6 @@ import {
   btnCuenta,
   btnNube,
   Feedback,
-  ventanaAjustes,
-  ventanaCuenta,
-  ventanaNube,
-  ventanaFeedback,
 } from "./elementos";
 
 // nos servira para guardar el boton que esta activo en ese momento,
@@ -51,28 +47,21 @@ botones.forEach((boton) => {
   });
 });
 
-/* logica para abrir las ventanas */
+btnAjustes.addEventListener("click", () => abrirModal("ventana_Ajustes"));
+btnCuenta.addEventListener("click", () => abrirModal("ventana_Cuenta"));
+btnNube.addEventListener("click", () => abrirModal("ventana_MigrarDatabase"));
+Feedback.addEventListener("click", () => abrirModal("ventana_Feedback"));
 
-btnAjustes.addEventListener("click", () => {
-  ventanaAjustes.classList.toggle("mostrarVentana");
-});
-btnCuenta.addEventListener("click", () => {
-  ventanaCuenta.classList.toggle("mostrarVentana");
-});
-btnNube.addEventListener("click", () => {
-  ventanaNube.classList.toggle("mostrarVentana");
-});
-Feedback.addEventListener("click", () => {
-  ventanaFeedback.classList.toggle("mostrarVentana");
-});
+function abrirModal(modal: string) {
+  // verificamos si existe
+  const dialog = document.getElementById(modal) as HTMLDialogElement;
+  if (!dialog) return;
 
-/*  eventos del DOM  */
+  // verificamos si existe
+  const dialogActivo = document.querySelector(
+    "dialog[open]",
+  ) as HTMLDialogElement;
+  if (dialogActivo) return;
 
-document.addEventListener("keypress", (e) => {
-  if (e.key == "Escape") {
-    ventanaAjustes.classList.remove("mostrarVentana");
-    ventanaCuenta.classList.remove("mostrarVentana");
-    ventanaNube.classList.remove("mostrarVentana");
-    ventanaFeedback.classList.remove("mostrarVentana");
-  }
-});
+  dialog.showModal();
+}
