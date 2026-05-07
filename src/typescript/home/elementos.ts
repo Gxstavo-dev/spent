@@ -42,9 +42,15 @@ export const btnSobreSpent = document.getElementById(
 export const Feedback = document.getElementById("Feedback") as HTMLElement;
 
 // las ventanas flotantes de acciones
-export const ventanaAjustes = document.getElementById("ventana_Ajustes");
-export const ventanaCuenta = document.getElementById("ventana_Cuenta");
-export const ventanaNube = document.getElementById("ventana_MigrarDatabase");
-export const ventanaGuia = document.getElementById("ventana_Acercade");
-export const SobreSpent = document.getElementById("ventana_Guia");
-export const ventanaFeedback = document.getElementById("ventana_Feedback");
+export const ventanaAjustes = document.getElementById(
+  "ventana_Ajustes",
+) as HTMLElement;
+export const ventanaCuenta = document.getElementById(
+  "ventana_Cuenta",
+) as HTMLElement;
+export const ventanaNube = document.getElementById(
+  "ventana_MigrarDatabase",
+) as HTMLElement;
+export const ventanaFeedback = document.getElementById(
+  "ventana_Feedback",
+) as HTMLElement;
