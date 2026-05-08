@@ -23,7 +23,10 @@ app.use(express.json());
 
 // Middleware CORS configurado para aceptar solicitudes desde el frontend en localhost:1420
 // con soporte para enviar cookies y credenciales (encabezados de autenticacion)
-app.use(cors({ origin: "http://localhost:1420", credentials: true }));
+app.use(cors({
+  origin: ["http://localhost:1420", "tauri://localhost", "https://tauri.localhost"],
+  credentials: true,
+}));
 
 // Montamos las rutas de usuarios bajo el prefijo /usuarios
 app.use("/usuarios", rutaUsuarios);

@@ -2,7 +2,6 @@ import { conexion } from "../../lib/local/Database";
 import bcrypt from "bcryptjs";
 import type { Usuarios } from "../../types/usuarios";
 import type { Request, Response } from "express";
-import jwt, { type JwtPayload } from "jsonwebtoken";
 
 // Importaciones:
 // conexion - conexion a la base de datos local SQLite
@@ -45,9 +44,7 @@ export const registrarse = async (req: Request, res: Response) => {
 
   // Verificamos si la insercion fue exitosa (debe afectar exactamente una fila)
   if (consulta.rowsAffected == 1) {
-    return res
-      .status(201)
-      .json({ status: "ok", id: consulta.lastInsertRowid });
+    return res.status(201).json({ status: "ok", id: consulta.lastInsertRowid });
   } else {
     return res
       .status(400)

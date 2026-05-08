@@ -10,7 +10,7 @@ import { eliminarGasto } from "../controllers/gasto/eliminarGasto";
 import { conteoGastos } from "../controllers/gasto/conteoGastos";
 import { crearPresupuesto } from "../controllers/presupuesto/crearPresupuesto";
 import { obtenerResumen } from "../controllers/resumen/obtenerResumen";
-import { eliminarDatos } from "../controllers/ajustes/eliminarDatos";
+import { eliminarDatos } from "../controllers/gasto/ajustes/eliminarDatos";
 
 // Importaciones de los controladores de transacciones:
 // Ingresos: crearIngreso, obtenerIngresos, actualizarIngreso, eliminarIngreso

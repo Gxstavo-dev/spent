@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:server": "bun build --compile --target=bun-linux-x64 ./express/src/index.ts --outfile ./express/servidor 2>&1 | tail -2",
     "preview": "vite preview",
     "server": "bun run --watch express/src/index.ts",
     "init": "concurrently \"bun run server\" \"tauri dev\""

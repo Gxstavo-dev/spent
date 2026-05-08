@@ -1,33 +1,29 @@
-// Configuracion de la conexion a la base de datos local usando libsql (SQLite)
-import { createClient } from "@libsql/client";
+import { Database } from "bun:sqlite";
 import path from "path";
-import fs from "fs";
 
-// Importaciones:
-// createClient - funcion del cliente libsql para crear la conexion a la base de datos
-// path - modulo de Node para manejar rutas de archivos
-// fs - modulo de Node para leer archivos del sistema de archivos
-
-// Ruta donde se almacenara el archivo fisico de la base de datos SQLite
 const rutaDb = path.join(__dirname, "spentLocal.db");
 
-// Ruta del archivo SQL que contiene la definicion de las tablas (esquema)
-const rutaSchema = path.join(__dirname, "../Schemas/schemas.sql");
+const db = new Database(rutaDb);
 
-// Creamos y exportamos la conexion a la base de datos local como un archivo .db
-export const conexion = createClient({
-  url: `file:${rutaDb}`,
-});
+async function execute({ sql, args }: { sql: string; args?: any[] }) {
+  const tipo = sql.trim().toUpperCase().split(/\s+/)[0];
 
-// Bloque try-catch para inicializar las tablas de la base de datos
-// si es que aun no existen (ejecutamos el esquema SQL al iniciar)
-try {
-  // Leemos el contenido del archivo de esquema SQL
-  const schema = fs.readFileSync(rutaSchema, "utf-8");
-
-  // Ejecutamos todas las sentencias SQL del esquema para crear las tablas si no existen
-  conexion.executeMultiple(schema);
-} catch (error) {
-  // Capturamos y mostramos cualquier error durante la inicializacion del esquema
-  console.error("Error al ejecutar schema:", error);
+  if (tipo === "SELECT") {
+    const stmt = db.query(sql);
+    const rows = args ? stmt.all(...args) : stmt.all();
+    return { rows: rows as any[], rowsAffected: 0, lastInsertRowid: 0 };
+  } else {
+    const resultado = args ? db.run(sql, ...args) : db.run(sql);
+    return {
+      rows: [],
+      rowsAffected: Number(resultado.changes),
+      lastInsertRowid: Number(resultado.lastInsertRowid),
+    };
+  }
 }
+
+function executeMultiple(sql: string) {
+  db.exec(sql);
+}
+
+export const conexion = { execute, executeMultiple };

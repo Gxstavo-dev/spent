@@ -32,7 +32,7 @@ export const conteoGastos = async (req: Request, res: Response) => {
     let total = 0;
 
     // Iteramos sobre cada fila del resultado de la consulta
-    consulta.rows.forEach((fila) => {
+    consulta.rows.forEach((fila: any) => {
       // Si la categoria es nula, la etiquetamos como "Sin categoria"
       const cat = (fila.categoria as string) || "Sin categoria";
       // Convertimos el total a numero

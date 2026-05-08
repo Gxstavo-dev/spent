@@ -2,7 +2,7 @@ import { conexion } from "../../lib/local/Database";
 import bcrypt from "bcryptjs";
 import type { Usuarios } from "../../types/usuarios";
 import type { Request, Response } from "express";
-import jwt, { type JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 // Importaciones:
 // conexion - conexion a la base de datos local SQLite
