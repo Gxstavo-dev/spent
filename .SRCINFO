@@ -1,0 +1,23 @@
+pkgbase = spent-tracker
+	pkgdesc = A personal expense tracker desktop app built with Tauri
+	pkgver = 0.1.0
+	pkgrel = 2
+	url = https://github.com/Gxstavo-dev/spent
+	arch = x86_64
+	license = MIT
+	makedepends = cargo
+	makedepends = bun
+	makedepends = python
+	depends = webkit2gtk-4.1
+	depends = gtk3
+	depends = libsoup3
+	depends = cairo
+	depends = gdk-pixbuf2
+	depends = glib2
+	depends = pango
+	depends = gcc-libs
+	options = !strip
+	source = spent-tracker-0.1.0.tar.gz::https://github.com/Gxstavo-dev/spent/archive/v0.1.0.tar.gz
+	sha256sums = 532c5a7806d2e0b543dbf0e61278c4889e2765f5f6e9a8af632dd9dd009b85ed
+
+pkgname = spent-tracker
